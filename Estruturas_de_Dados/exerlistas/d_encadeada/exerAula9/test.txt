@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <curses.h>
+#include "node.h"
+
+void *alocate(void *p)
+{
+    return (typeof(p))malloc(10 * sizeof(typeof(p)));
+}
+
+int main()
+{
+    char *vet;
+
+    vet = alocate(vet);
+
+    for (int i = 0; i < 10; i++)
+    {
+        vet[i] = i + 32;
+        printf("%c\n", vet[i]);
+    }
+}
