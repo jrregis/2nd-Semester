@@ -15,3 +15,16 @@ Coach *createCoach(char name[50], int id_coach)
 
     return c;
 }
+
+void showCoach(void *coach)
+{
+    Coach *c = (Coach *)coach;
+    printf("----------------\n");
+    printf("%d - %s\n", c->id_coach, c->name);
+    printf("----------------\n");
+}
+
+void showCoachs(Node *coachs)
+{
+    show(coachs, &showCoach);
+}

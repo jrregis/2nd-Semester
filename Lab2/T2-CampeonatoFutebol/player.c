@@ -18,3 +18,15 @@ Player *createPlayer(char name[50], char position[50], int age, int number, int 
     strcpy(p->positon, position);
     return p;
 }
+
+void showPlayer(void *player)
+{
+    Player *p = (Player *)player;
+    printf("----------------\n");
+    printf("%d - %s - POSICAO %s \nCAMISA: %d IDADE %d\n", p->id_player, p->name, p->positon, p->number, p->age);
+    printf("----------------\n");
+}
+void showPlayers(Node *players)
+{
+    show(players, &showPlayer);
+}

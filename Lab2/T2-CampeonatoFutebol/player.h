@@ -12,4 +12,7 @@ Player *createPlayer(char name[50], char position[50], int age, int number, int 
 Player *searchPlayer(Node *players, int id_player);
 Player *removePlayer(Node *players, int id_player);
 
+void showPlayer(void *palyer);
+void showPlayers(Node *players);
+
 #endif
