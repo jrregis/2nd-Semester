@@ -17,7 +17,7 @@ struct nodeHet
 {
     int type;
     void *info;
-    struct listaHet *next;
+    struct nodeHet *next;
 };
 typedef struct nodeHet nodeHet;
 nodeHet *InsertT(nodeHet *l, int id, float salary, char *name);

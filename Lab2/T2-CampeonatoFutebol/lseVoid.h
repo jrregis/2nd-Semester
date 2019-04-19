@@ -1,5 +1,8 @@
+#ifndef LSEVOID_H
+#define LSEVOID_H
+
 #include <stdbool.h>
-typedef struct
+typedef struct Node
 {
     void *info;
     struct Node *next;
@@ -15,3 +18,5 @@ Node *lastNode(Node *head);                 //ACHA O ULTIMO NO DA LISTA
 void show(Node *head, void showElement(void *));                         //RECEBE A LISTA E UM PONTEIRO PARA IMPRIMIR CADA ELEMENTO DA LISTA NA showElement()
 void *searching(Node *head, void *element, bool equal(void *, void *));  //RECEBE A LISTA E UM PONTEIRO PARA UMA FUNCAO QUE COMPORA DOIS ELEMENTO DA LISTA
 Node *removeNode(Node *head, void *element, bool equal(void *, void *)); //RECEBE A LISTA E UM PONTEIRO PARA UMA FUNCAO QUE COMPORA DOIS ELEMENTO DA LISTA
+
+#endif
