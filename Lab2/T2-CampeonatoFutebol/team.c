@@ -2,6 +2,3 @@
 #include <stdlib.h>
 #include "lseVoid.h"
 #include "team.h"
-int main()
-{
-}
