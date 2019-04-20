@@ -34,7 +34,7 @@ Player *createPlayer(char name[50], char position[50], int age, int number, int 
     return p;
 }
 
-void showPlayer(void *player)
+void printPlayer(void *player)
 {
     Player *p = (Player *)player;
     printf("\n");
@@ -43,5 +43,5 @@ void showPlayer(void *player)
 }
 void showPlayers(Node *players)
 {
-    show(players, &showPlayer);
+    show(players, &printPlayer);
 }

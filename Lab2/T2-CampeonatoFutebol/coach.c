@@ -6,6 +6,21 @@
 #include "player.h"
 #include "coach.h"
 
+bool equalCoach(void *coach, int id)
+{
+    return ((Coach *)coach)->id_coach == id;
+}
+
+Node *removeCoach(Node *coachs, int id)
+{
+    return removeNode(coachs, id, &equalCoach);
+}
+
+Coach *searchCoach(Node *coach, int id)
+{
+    return (Coach *)searching(coach, id, &equalCoach);
+}
+
 Coach *createCoach(char name[50], int id_coach)
 {
     Coach *c = (Coach *)malloc(sizeof(Coach));
@@ -16,15 +31,15 @@ Coach *createCoach(char name[50], int id_coach)
     return c;
 }
 
-void showCoach(void *coach)
+void printCoach(void *coach)
 {
     Coach *c = (Coach *)coach;
-    printf("----------------\n");
+    printf("\n");
     printf("%d - %s\n", c->id_coach, c->name);
-    printf("----------------\n");
+    printf("\n");
 }
 
 void showCoachs(Node *coachs)
 {
-    show(coachs, &showCoach);
+    show(coachs, &printCoach);
 }

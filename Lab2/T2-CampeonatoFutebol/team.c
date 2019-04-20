@@ -37,7 +37,7 @@ Team *createTeam(char name[50], char home[50], char city[50], short dd, short mm
     return t;
 }
 
-void showTeam(void *team)
+void printTeam(void *team)
 {
     Team *t = (Team *)team;
     printf("\n");
@@ -49,7 +49,7 @@ void showTeam(void *team)
     printf("\n");
 }
 
-void showTeamS(Node *head)
+void showTeams(Node *head)
 {
-    show(head, &showTeam);
+    show(head, &printTeam);
 }

@@ -8,11 +8,11 @@ typedef struct
     int id_coach;
 } Coach;
 
-Coach *createCoach(char name[50], int id_coach);
-Coach *searchCoach(Node *coachs, int id_coach);
-Coach *removeCoach(Node *coachs, int id_coach);
-
-void showCoach(void *coach);
+Coach *createCoach(char name[50], int id);
+Coach *searchCoach(Node *coachs, int id);
+Node *removeCoach(Node *coachs, int id);
+bool equalCoach(void *coach, int id);
+void printCoach(void *coach);
 void showCoachs(Node *coachs);
 
 #endif
