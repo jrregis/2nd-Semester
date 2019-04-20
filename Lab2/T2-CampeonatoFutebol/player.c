@@ -6,6 +6,21 @@
 #include "player.h"
 #include "coach.h"
 
+bool equalPlayer(void *player, int id)
+{
+    return ((Player *)player)->id_player == id;
+}
+
+Node *removePlayer(Node *players, int id)
+{
+    return removeNode(players, id, &equalPlayer);
+}
+
+Player *searchPlayer(Node *player, int id)
+{
+    return (Player *)searching(player, id, &equalPlayer);
+}
+
 Player *createPlayer(char name[50], char position[50], int age, int number, int id_player)
 {
     Player *p = (Player *)malloc(sizeof(Player));
@@ -22,9 +37,9 @@ Player *createPlayer(char name[50], char position[50], int age, int number, int 
 void showPlayer(void *player)
 {
     Player *p = (Player *)player;
-    printf("----------------\n");
-    printf("%d - %s - POSICAO %s \nCAMISA: %d IDADE %d\n", p->id_player, p->name, p->positon, p->number, p->age);
-    printf("----------------\n");
+    printf("\n");
+    printf("ID: %d NOME: %s \nPOSICAO %s \nCAMISA: %d IDADE %d\n", p->id_player, p->name, p->positon, p->number, p->age);
+    printf("\n");
 }
 void showPlayers(Node *players)
 {
