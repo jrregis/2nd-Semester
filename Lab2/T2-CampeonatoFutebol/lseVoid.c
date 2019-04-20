@@ -69,12 +69,12 @@ void show(Node *head, void showElement(void *))
     }
 }
 
-void *searching(Node *head, void *element, bool equal(void *, void *))
+void *searching(Node *head, int id, bool equal(void *, int))
 {
     Node *tmp = head;
     while (tmp != NULL)
     {
-        if (equal(tmp->info, element))
+        if (equal(tmp->info, id))
             return tmp->info;
         tmp = tmp->next;
     }
