@@ -18,7 +18,7 @@ typedef struct
 
 Team *createTeam(char name[50], char home[50], char city[50], short dd, short mm, int yy, int id_team);
 Team *searchTeam(Node *teams, int id);
-Team *removeTeam(Node *teams, int id_team);
+Node *removeTeam(Node *teams, int id);
 void showTeam(void *team);
 void showTeamS(Node *head);
 

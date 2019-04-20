@@ -13,10 +13,15 @@ int main()
     team_head = insertEnd(team_head, createTeam("Inter", "Beira Rio", "POA", 10, 10, 1998, 0));
     team_head = insertEnd(team_head, createTeam("Time 1", "Estadio 1", "Cidade 1", 1, 1, 1999, 1));
     team_head = insertEnd(team_head, createTeam("Time 2", "Estadio 2", "Cidade 2", 05, 03, 2010, 2));
-    // printf("LISTA DE TIMES\n");
-    //showTeamS(team_head);
-    test = searchTeam(team_head, 2);
-    printf(" %d %s\n", test->id_team, test->name);
+    printf("LISTA DE TIMES\n");
+    showTeamS(team_head);
+
+    // team_head = removeTeam(team_head, 1);
+    // printf("COM TIMES REMOVIDOS\n");
+    // showTeamS(team_head);
+
+    // test = searchTeam(team_head, 2);
+    // printf(" %d %s\n", test->id_team, test->name);
     //showTeamS(test);
 
     /*Node *player_head = createList();

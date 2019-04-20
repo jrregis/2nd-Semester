@@ -81,12 +81,12 @@ void *searching(Node *head, int id, bool equal(void *, int))
     return NULL;
 }
 
-Node *removeNode(Node *head, void *element, bool equal(void *, void *))
+Node *removeNode(Node *head, int id, bool equal(void *, int))
 {
     Node *prev = NULL;
     Node *tmp = head;
 
-    while (!emptyList(head) && !equal(tmp->info, element))
+    while (!emptyList(head) && !equal(tmp->info, id))
     {
         prev = tmp;
         tmp = tmp->next;
@@ -103,6 +103,7 @@ Node *removeNode(Node *head, void *element, bool equal(void *, void *))
     free(tmp);
     return head;
 }
+
 Node *freeList(Node *head)
 {
     while (!emptyList(head))

@@ -10,6 +10,12 @@ bool equalTeam(void *team, int id)
 {
     return ((Team *)team)->id_team == id;
 }
+
+Node *removeTeam(Node *teams, int id)
+{
+    return removeNode(teams, id, &equalTeam);
+}
+
 Team *searchTeam(Node *team, int id)
 {
     return (Team *)searching(team, id, &equalTeam);
