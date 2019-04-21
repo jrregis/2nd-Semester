@@ -9,9 +9,7 @@
 void printPlayer(void *player)
 {
     Player *p = (Player *)player;
-    printf("\n");
-    printf("ID: %d NOME: %s \nPOSICAO %s \nCAMISA: %d IDADE %d\n", p->id_player, p->name, p->positon, p->number, p->age);
-    printf("\n");
+    printf("\nID: %d NOME: %s \nPOSICAO %s \nCAMISA: %d IDADE %d\n", p->id_player, p->name, p->positon, p->number, p->age);
 }
 void showPlayers(Node *players)
 {

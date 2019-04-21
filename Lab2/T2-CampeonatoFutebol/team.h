@@ -1,11 +1,13 @@
 #ifndef TEAM_H
 #define TEAM_H
 #include "lseVoid.h"
+#include "player.h"
 
 typedef struct
 {
     char name[50], home[50], city[50];
-    int id_team, points, d, m, y;
+    int id_team, d, m, y;
+    int points, fault, card_y, card_r;
     Node *players;
 } Team;
 
@@ -15,5 +17,9 @@ Node *removeTeam(Node *teams, int id);
 void printTeam(void *team);
 void showTeams(Node *head);
 void readTeam(Node *teams);
+void registerPlayer(Team *team, Player *player);
+void unregisterPlayer(Team *team, int id);
+void insertingPlayerInTeam(Node *team_head, Node *player_head);
+void removingPlayerOfTeam(Node *team_head);
 
 #endif

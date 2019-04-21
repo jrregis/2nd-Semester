@@ -13,7 +13,8 @@ void printTeam(void *team)
     printf("%d - %s\n", t->id_team, t->name);
     printf("%s, %s\n", t->home, t->city);
     printf("%d/%d/%d\n", t->d, t->m, t->y);
-    printf("\n");
+    if (t->players != NULL)
+        printf("\nJOGADORES DO TIME");
     showPlayers(t->players);
     printf("\n");
 }
@@ -80,4 +81,69 @@ void readTeam(Node *teams)
     } while (searchTeam(teams, id) != NULL);
 
     insertEnd(teams, createTeam(name, home, city, d, m, y, id));
+}
+
+void registerPlayer(Team *team, Player *player)
+{
+    team->players = insertEnd(team->players, player);
+}
+
+void unregisterPlayer(Team *team, int id)
+{
+    team->players = removePlayer(team->players, searchPlayer(team->players, id));
+}
+
+void insertingPlayerInTeam(Node *team_head, Node *player_head)
+{
+    Team *t;
+    int id_team, id_player;
+
+    printf("DIGITE A ID DO TIME: ");
+    scanf("%d", &id_team);
+
+    if (searchTeam(team_head, id_team) == NULL)
+    {
+        printf("NAO HA TIMES CADASTRADOS COM ESSA ID\n");
+        exit(EXIT_SUCCESS);
+    }
+
+    printf("DIGITE A ID DO JOGADOR: ");
+    scanf("%d", &id_player);
+
+    if (searchPlayer(player_head, id_player) == NULL)
+    {
+        printf("NAO HA JOGADORES CADASTRADOS COM ESSA ID\n");
+        exit(EXIT_SUCCESS);
+    }
+
+    t = searchTeam(team_head, id_team);
+    registerPlayer(t, searchPlayer(player_head, id_player));
+}
+
+void removingPlayerOfTeam(Node *team_head)
+{
+    Team *t;
+    int id_team, id_player;
+
+    printf("DIGITE A ID DO TIME: ");
+    scanf("%d", &id_team);
+
+    if (searchTeam(team_head, id_team) == NULL)
+    {
+        printf("TIME NAO CADASTRADO\n");
+        exit(EXIT_SUCCESS);
+    }
+    else
+        t = searchTeam(team_head, id_team);
+
+    printf("DIGITE A ID DO JOGADOR: ");
+    scanf("%d", &id_player);
+
+    if (searchPlayer(t->players, id_player) == NULL)
+    {
+        printf("JOGADOR NAO CADASTRADO NO TIME\n");
+        exit(EXIT_SUCCESS);
+    }
+    else
+        unregisterPlayer(t, id_player);
 }

@@ -5,7 +5,8 @@
 typedef struct
 {
     char name[50], positon[50];
-    int age, number, id_player, goal;
+    int age, number, id_player;
+    int card_y, card_r, goal;
 } Player;
 
 Player *createPlayer(char name[50], char position[50], int age, int number, int id_player);
