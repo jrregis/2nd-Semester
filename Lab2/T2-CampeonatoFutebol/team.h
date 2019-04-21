@@ -4,22 +4,16 @@
 
 typedef struct
 {
-    short dd, mm;
-    int yy;
-} Date;
-
-typedef struct
-{
     char name[50], home[50], city[50];
-    Date foundation;
-    int id_team, points;
+    int id_team, points, d, m, y;
     Node *players;
 } Team;
 
-Team *createTeam(char name[50], char home[50], char city[50], short dd, short mm, int yy, int id_team);
+Team *createTeam(char name[50], char home[50], char city[50], int d, int m, int y, int id_team);
 Team *searchTeam(Node *teams, int id);
 Node *removeTeam(Node *teams, int id);
 void printTeam(void *team);
 void showTeams(Node *head);
+void readTeam(Node *teams);
 
 #endif

@@ -14,5 +14,6 @@ Node *removePlayer(Node *players, int id);
 bool equalPlayer(void *player, int id);
 void printPlayer(void *palyer);
 void showPlayers(Node *head);
+void readPlayer(Node *players);
 
 #endif
