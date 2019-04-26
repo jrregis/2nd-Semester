@@ -7,8 +7,12 @@ int getOpt(void)
     int opt = 0;
     printf("CODIGO DE HAMMING\n\n");
     printf("0 - Inserir Decimal (0-15)\n1 - Inserir Binario (max. 4bits)\n");
-    printf("LEITURA: ");
-    scanf("%d", &opt);
+
+    do
+    {
+        printf("LEITURA: ");
+        scanf("%d", &opt);
+    } while (opt != 0 && opt != 1);
     return opt;
 }
 
@@ -46,7 +50,9 @@ int main()
 
     clearScreen();
 
-    printf("CODIGO DE HAMMING FINAL: ");
+    printf("VALOR TRANSMITIDO: %d\n", value);
+
+    printf("CODIGO DE HAMMING TRANSMITIDO: ");
     printArray(cod, C_LEN);
 
     printf("CODIGO DE PARIDADE: ");
@@ -74,7 +80,7 @@ int main()
         printf("NAO HOUVE ERRO NA TRANSMISSAO!\n");
     }
 
-    printf("CODIGO FINAL: ");
+    printf("CODIGO DE HAMMING RECEBIDO: ");
     printArray(cod, C_LEN);
 
     /*for (int i = 0; i < LEN; i++)

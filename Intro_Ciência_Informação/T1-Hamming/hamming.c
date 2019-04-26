@@ -22,12 +22,12 @@ int checkAndFixArray(int cod[], int test[])
     int e = 0;
     for (int i = 0; i < T_LEN; i++)
     {
-        e += test[i] * pow(2, i);
+        e += test[T_LEN - i - 1] * pow(2, i);
     }
 
     if (e > 0)
     {
-        printf("POSICAO DO ERRO: %d\n", e - 1);
+        printf("POSICAO DO ERRO: %d\n", e);
 
         cod[e - 1] = 1 - cod[e - 1];
         return 0;
@@ -42,12 +42,12 @@ void getHammingParityArray(int cod[], int test[])
 {
     for (int i = 0; i < HL; i++)
     {
-        test[i] = 0;
+        test[HL - i - 1] = 0;
         for (int j = 0; j < HC; j++)
         {
-            test[i] += cod[j] * H[i][j];
+            test[HL - i - 1] += cod[j] * H[i][j];
         }
-        test[i] = test[i] % 2;
+        test[HL - i - 1] = test[HL - i - 1] % 2;
     }
 }
 
@@ -113,7 +113,7 @@ void insertError(int cod[])
     int error, count = 1, pos;
     do
     {
-        printf("INFORME A QUANTIDADE DE ERROS QUE DESEJA INSERIR: ");
+        printf("INFORME A QUANTIDADE DE ERROS QUE DESEJA INSERIR (0-3): ");
         scanf("%d", &error);
     } while (error < 0 || error > 3);
 
@@ -123,10 +123,10 @@ void insertError(int cod[])
         printf("CODIGO DE HAMMING GERADO: ");
         printArray(cod, C_LEN);
 
-        printf("INDIQUE A POSICADO DO %ḍ° ERRO (0-6): ", count);
+        printf("INDIQUE A POSICAO DO %ḍ° ERRO (1-7): ", count);
         scanf("%d", &pos);
 
-        cod[pos] = 1 - cod[pos];
+        cod[pos - 1] = 1 - cod[pos - 1];
 
         count++;
         error--;
