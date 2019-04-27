@@ -90,7 +90,10 @@ void registerPlayer(Team *team, Player *player)
 
 void unregisterPlayer(Team *team, int id)
 {
-    team->players = removePlayer(team->players, searchPlayer(team->players, id));
+    if (searchPlayer(team->players, id))
+        team->players = removePlayer(team->players, id);
+    else
+        printf("JOGADOR %d NÃO ESTA NESSE TIME\n", id);
 }
 
 void insertingPlayerInTeam(Node *team_head, Node *player_head)

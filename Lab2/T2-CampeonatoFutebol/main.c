@@ -26,17 +26,18 @@ int main()
     coach_head = insertEnd(coach_head, createCoach("TEC 2", 2));
     coach_head = insertEnd(coach_head, createCoach("TEC 3", 3));
 
-    test = searchTeam(team_head, 0);
+    /*    test = searchTeam(team_head, 0);
     registerPlayer(test, searchPlayer(player_head, 0));
     registerPlayer(test, searchPlayer(player_head, 1));
 
     printf("APOS INCLUIR NO TIME\n");
     showTeams(team_head);
 
-    unregisterPlayer(test, 1);
+    unregisterPlayer(test, 2);
+    unregisterPlayer(test, 0);
     printf("APOS EXCLUIR DO TIME\n");
+    showTeams(team_head); */
     showTeams(team_head);
-    /*showTeams(team_head);
 
     insertingPlayerInTeam(team_head, player_head);
     printf("incluido\n");
@@ -44,5 +45,5 @@ int main()
 
     removingPlayerOfTeam(team_head);
     printf("removido\n");
-    showTeams(team_head);*/
+    showTeams(team_head);
 }
