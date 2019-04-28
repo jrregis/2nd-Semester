@@ -10,7 +10,7 @@
 void printPlayer(void *player)
 {
     Player *p = (Player *)player;
-    printf("\nID: %d NOME: %s \nPOSICAO %s \nCAMISA: %d IDADE %d\n", p->id_player, p->name, p->positon, p->number, p->age);
+    printf("\nID: %d NOME: %s \nPOSICAO %s \nCAMISA: %d IDADE %d\nGOLS: %d\nFALTAS: %d\nAMARELOS: %d\nVERMELHOS: %d\n", p->id_player, p->name, p->positon, p->number, p->age, p->goal, p->fault, p->card_y, p->card_r);
 }
 void showPlayers(Node *players)
 {

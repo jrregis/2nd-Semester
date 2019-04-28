@@ -7,7 +7,7 @@ typedef struct
 {
     char name[50], home[50], city[50];
     int id_team, d, m, y;
-    int points, fault, card_y, card_r, quanty_players, goal;
+    int points, fault, card_y, card_r, quanty_players, goal_done, goal_conceded;
     Node *players, *selection;
 } Team;
 
@@ -19,7 +19,7 @@ void showTeams(Node *head);
 void readTeam(Node *teams, Node *player, Node *coach);
 void registerPlayer(Team *team, Player *player);
 void unregisterPlayer(Team *team, int id);
-void insertingPlayerInTeam(Node *team_head, Node *player_head);
+void insertingPlayerInTeam(Node *team, Node *player);
 void removingPlayerOfTeam(Node *team_head);
 void selectionPlayersToMatch(Team *team);
 

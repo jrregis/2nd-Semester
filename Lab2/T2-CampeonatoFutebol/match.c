@@ -30,6 +30,8 @@ Match *createMatch(Node *team_head)
 
     m->t2 = searchTeam(team_head, id_t2);
 
+    printf("DIGITE O ID DA PARTIDA \n");
+    scanf("%d", &m->id_match);
     printf("DIGITE O ID DA RODADA \n");
     scanf("%d", &m->id_round);
 
@@ -42,8 +44,8 @@ void printMatch(void *match_head)
 
     printf("\n");
     printf("RODADA: %d \n", m->id_round);
+    printf("PARTIDA: %d \n", m->id_match);
     printf("%s vs %s \n", m->t1->name, m->t2->name);
-    printf("%d vs %d \n", m->goal_t1, m->goal_t2);
 }
 
 void showMatch(Node *head)
@@ -65,4 +67,3 @@ Node *removeMatch(Node *match, int id)
 {
     return removeNode(match, id, &equalMatch);
 }
-

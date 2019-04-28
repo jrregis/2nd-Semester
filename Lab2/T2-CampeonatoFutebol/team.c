@@ -6,6 +6,7 @@
 #include "player.h"
 #include "coach.h"
 #include "menu.h"
+#include "match.h"
 
 void printTeam(void *team)
 {
@@ -14,6 +15,13 @@ void printTeam(void *team)
     printf("%d - %s\n", t->id_team, t->name);
     printf("%s, %s\n", t->home, t->city);
     printf("%d/%d/%d\n", t->d, t->m, t->y);
+    printf("GOLS FEITOS: %d\n", t->goal_done);
+    printf("GOLS SOFRIDOS: %d\n", t->goal_conceded);
+    printf("FALTAS COMETIDAS: %d\n", t->fault);
+    printf("AMARELOS: %d\n", t->card_y);
+    printf("VERMELHOS: %d\n", t->card_r);
+    printf("PONTOS: %d\n", t->points);
+
     if (t->players != NULL)
         printf("\nJOGADORES DO TIME");
     showPlayers(t->players);
@@ -99,80 +107,4 @@ void unregisterPlayer(Team *team, int id)
         team->players = removePlayer(team->players, id);
     else
         printf("JOGADOR %d NÃO ESTA NESSE TIME\n", id);
-}
-
-void insertingPlayerInTeam(Node *team_head, Node *player_head)
-{
-    Team *t;
-    int id_team, id_player;
-
-    printf("DIGITE A ID DO TIME: ");
-    scanf("%d", &id_team);
-
-    if (searchTeam(team_head, id_team) == NULL)
-    {
-        printf("NAO HA TIMES CADASTRADOS COM ESSA ID\n");
-        exit(EXIT_SUCCESS);
-    }
-
-    printf("DIGITE A ID DO JOGADOR: ");
-    scanf("%d", &id_player);
-
-    if (searchPlayer(player_head, id_player) == NULL)
-    {
-        printf("NAO HA JOGADORES CADASTRADOS COM ESSA ID\n");
-        exit(EXIT_SUCCESS);
-    }
-
-    t = searchTeam(team_head, id_team);
-    registerPlayer(t, searchPlayer(player_head, id_player));
-}
-
-void removingPlayerOfTeam(Node *team_head)
-{
-    Team *t;
-    int id_team, id_player;
-
-    printf("DIGITE A ID DO TIME: ");
-    scanf("%d", &id_team);
-
-    if (searchTeam(team_head, id_team) == NULL)
-    {
-        printf("TIME NAO CADASTRADO\n");
-        exit(EXIT_SUCCESS);
-    }
-    else
-        t = searchTeam(team_head, id_team);
-
-    printf("DIGITE A ID DO JOGADOR: ");
-    scanf("%d", &id_player);
-
-    if (searchPlayer(t->players, id_player) == NULL)
-    {
-        printf("JOGADOR NAO CADASTRADO NO TIME\n");
-        exit(EXIT_SUCCESS);
-    }
-    else
-        unregisterPlayer(t, id_player);
-}
-
-void selectionPlayersToMatch(Team *team)
-{
-    int id, count = 0;
-    Player *p;
-
-    printf("MONTANDO ESCALAÇÃO DA PARTIDA\n");
-    do
-    {
-        printf("DIGITE A ID DO JOGADOR A SER ESCALADO: ");
-        scanf("%d", &id);
-        if (searchPlayer(team->players, id))
-        {
-            p = searchPlayer(team->players, id);
-            team->selection = insertEnd(team->selection, p);
-            count++;
-        }
-        else
-            printf("JOGADOR NÃO RELACIONADO NO TIME\n");
-    } while (count < 11);
 }
