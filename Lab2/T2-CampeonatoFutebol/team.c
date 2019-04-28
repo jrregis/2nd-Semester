@@ -41,7 +41,7 @@ Team *searchTeam(Node *team, int id)
 
 Team *createTeam(char name[50], char home[50], char city[50], int d, int m, int y, int id_team)
 {
-    Node *new_node;
+    // Node *new_node;
 
     Team *t = (Team *)malloc(sizeof(Team));
     strcpy(t->name, name);
@@ -85,7 +85,9 @@ void readTeam(Node *teams)
 
 void registerPlayer(Team *team, Player *player)
 {
-    team->players = insertEnd(team->players, player);
+    team->quanty_players++;
+    if (team->quanty_players <= 25)
+        team->players = insertEnd(team->players, player);
 }
 
 void unregisterPlayer(Team *team, int id)
@@ -149,4 +151,25 @@ void removingPlayerOfTeam(Node *team_head)
     }
     else
         unregisterPlayer(t, id_player);
+}
+
+void selectionPlayersToMatch(Team *team)
+{
+    int id, count = 0;
+    Player *p;
+
+    printf("MONTANDO ESCALAÇÃO DA PARTIDA\n");
+    do
+    {
+        printf("DIGITE A ID DO JOGADOR A SER ESCALADO: ");
+        scanf("%d", &id);
+        if (searchPlayer(team->players, id))
+        {
+            p = searchPlayer(team->players, id);
+            team->selection = insertEnd(team->selection, p);
+            count++;
+        }
+        else
+            printf("JOGADOR NÃO RELACIONADO NO TIME\n");
+    } while (count < 11);
 }
