@@ -5,6 +5,7 @@
 #include "team.h"
 #include "player.h"
 #include "coach.h"
+#include "menu.h"
 
 void printCoach(void *coach)
 {
@@ -44,7 +45,7 @@ Coach *createCoach(char name[50], int id_coach)
     return c;
 }
 
-void readCoach(Node *coachs)
+void readCoach(Node *team, Node *player, Node *coachs)
 {
     char name[50];
     int id;
@@ -61,4 +62,7 @@ void readCoach(Node *coachs)
     } while (searchCoach(coachs, id) != NULL);
 
     insertEnd(coachs, createCoach(name, id));
+
+    system("clear");
+    menuInclude(team, player, coachs);
 }

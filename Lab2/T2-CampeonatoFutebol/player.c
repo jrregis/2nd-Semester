@@ -5,6 +5,7 @@
 #include "team.h"
 #include "player.h"
 #include "coach.h"
+#include "menu.h"
 
 void printPlayer(void *player)
 {
@@ -43,7 +44,7 @@ Player *createPlayer(char name[50], char position[50], int age, int number, int 
     strcpy(p->positon, position);
     return p;
 }
-void readPlayer(Node *players)
+void readPlayer(Node *team, Node *players, Node *coach)
 {
     char name[50], position[50];
     int age, number, id;
@@ -60,12 +61,14 @@ void readPlayer(Node *players)
     printf("DIGITE A IDADE DO JOGADOR: ");
     scanf("%d", &age);
 
-    printf("DIGITE A ID DO JOGADOR: ");
     do
     {
-        if (searchPlayer(players, id) != NULL)
-            printf("ID JA CADASTRADA DIGITE OUTRA: ");
+        printf("DIGITE A ID DO JOGADOR: ");
         scanf("%d", &id);
     } while (searchPlayer(players, id) != NULL);
+
     insertEnd(players, createPlayer(name, position, age, number, id));
+
+    system("clear");
+    menuInclude(team, players, coach);
 }

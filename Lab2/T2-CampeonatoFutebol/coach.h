@@ -14,6 +14,6 @@ Node *removeCoach(Node *coachs, int id);
 bool equalCoach(void *coach, int id);
 void printCoach(void *coach);
 void showCoachs(Node *coachs);
-void readCoach(Node *coachs);
+void readCoach(Node *team, Node *player, Node *coachs);
 
 #endif

@@ -5,6 +5,7 @@
 #include "team.h"
 #include "player.h"
 #include "coach.h"
+#include "menu.h"
 
 void printTeam(void *team)
 {
@@ -55,7 +56,7 @@ Team *createTeam(char name[50], char home[50], char city[50], int d, int m, int 
     return t;
 }
 
-void readTeam(Node *teams)
+void readTeam(Node *teams, Node *player, Node *coach)
 {
     char name[50], home[50], city[50];
     int d, m, y, id;
@@ -81,6 +82,8 @@ void readTeam(Node *teams)
     } while (searchTeam(teams, id) != NULL);
 
     insertEnd(teams, createTeam(name, home, city, d, m, y, id));
+    system("clear");
+    menuInclude(teams, player, coach);
 }
 
 void registerPlayer(Team *team, Player *player)

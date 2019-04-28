@@ -6,14 +6,23 @@
 #include "player.h"
 #include "coach.h"
 #include "match.h"
+#include "menu.h"
 
 int main()
 {
     Node *team_head = createList();
-    Node *match = createList();
+    Node *match_head = createList();
+    Node *player_head = createList();
+    Node *coach_head = createList();
 
     Team *test;
     Match *m;
+    team_head = insertEnd(team_head, createTeam("Inter", "Beira Rio", "POA", 10, 10, 1998, 0));
+    player_head = insertEnd(player_head, createPlayer("Joao", "Ata", 20, 10, 0));
+    coach_head = insertEnd(coach_head, createCoach("TEC 1", 1));
+
+    mainMenu(team_head, player_head, coach_head);
+
     //////////////////////////////INSERÇÕES PARA TESTE RÁPIDO
     /*team_head = insertEnd(team_head, createTeam("Inter", "Beira Rio", "POA", 10, 10, 1998, 0));
     team_head = insertEnd(team_head, createTeam("Time 1", "Estadio 1", "Cidade 1", 1, 1, 1999, 1));
