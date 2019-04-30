@@ -16,11 +16,8 @@ Team *searchTeam(Node *teams, int id);
 Node *removeTeam(Node *teams, int id);
 void printTeam(void *team);
 void showTeams(Node *head);
-void readTeam(Node *teams, Node *player, Node *coach);
+void readTeam(Node *teams, Node *player, Node *coach, Node *match, Node *round);
 void registerPlayer(Team *team, Player *player);
 void unregisterPlayer(Team *team, int id);
-void insertingPlayerInTeam(Node *team, Node *player);
-void removingPlayerOfTeam(Node *team_head);
-void selectionPlayersToMatch(Team *team);
 
 #endif

@@ -8,17 +8,19 @@
 #include "coach.h"
 #include "match.h"
 #include "menu.h"
+#include "round.h"
 
-void menuSearch(Node *team, Node *player, Node *coach)
+void menuSearch(Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
-    int op, op1, id_team, id_player, id_coach;
+    int op, op1, id_team, id_player, id_coach, id_round;
     Team *t;
     Player *p;
     Coach *c;
+    Round *r;
 
     system("clear");
     printf("\t\tBUSCAR\n");
-    printf("0 - TIME\n1 - JOGADOR\n2 - TECNICO\n3 - VOLTAR\n");
+    printf("0 - TIME\n1 - JOGADOR\n2 - TECNICO\n3 - RODADA\n4 - VOLTAR \n");
     scanf("%d", &op);
 
     switch (op)
@@ -63,7 +65,21 @@ void menuSearch(Node *team, Node *player, Node *coach)
         }
         break;
     case 3:
-        menuSignUp(team, player, coach);
+        printf("DIGITE A ID DA RODADA: ");
+        scanf("%d", &id_round);
+        r = searchRound(round, id_round);
+        if (r != NULL)
+        {
+            printRound(r);
+        }
+        else
+        {
+            printf("RODADA NAO CADASTRADA\n");
+        }
+        break;
+    case 4:
+        menuSignUp(team, player, coach, match, round);
+        break;
 
     default:
         break;
@@ -76,17 +92,17 @@ void menuSearch(Node *team, Node *player, Node *coach)
         exit(1);
         break;
     case 1:
-        menuSignUp(team, player, coach);
+        menuSignUp(team, player, coach, match, round);
     default:
         break;
     }
 }
-void menuDelete(Node *team, Node *player, Node *coach)
+void menuDelete(Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
-    int op, id_team, id_player, id_coach;
+    int op, id_team, id_player, id_coach, id_match;
     system("clear");
     printf("\t\tEXCLUIR\n");
-    printf("0 - TIME\n1 - JOGADOR\n2 - TECNICO\n3 - VOLTAR\n");
+    printf("0 - TIME\n1 - JOGADOR\n2 - TECNICO\n3 - PARTIDA\n4 - VOLTAR\n");
     scanf("%d", &op);
 
     switch (op)
@@ -122,39 +138,53 @@ void menuDelete(Node *team, Node *player, Node *coach)
 
         break;
     case 3:
-        menuSignUp(team, player, coach);
+        do
+        {
+            printf("DIGITE A ID DA PARTIDA A SER EXCLUIDA: ");
+            scanf("%d", &id_match);
+        } while (searchMatch(match, id_match) == NULL);
+
+        match = removeMatch(match, id_match);
+
+        break;
+    case 4:
+        menuSignUp(team, player, coach, match, round);
 
     default:
         break;
     }
 }
-void menuInclude(Node *team, Node *player, Node *coach)
+void menuInclude(Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
     int op;
     system("clear");
     printf("\t\tINCLUIR\n");
-    printf("0 - TIME\n1 - JOGADOR\n2 - TECNICO\n3 - VOLTAR\n");
+    printf("0 - TIME\n1 - JOGADOR\n2 - TECNICO\n3 - RODADA\n4 - VOLTAR \n");
     scanf("%d", &op);
 
     switch (op)
     {
     case 0:
-        readTeam(team, player, coach);
+        readTeam(team, player, coach, match, round);
         break;
     case 1:
-        readPlayer(team, player, coach);
+        readPlayer(team, player, coach, match, round);
         break;
     case 2:
-        readCoach(team, player, coach);
+        readCoach(team, player, coach, match, round);
         break;
     case 3:
-        menuSignUp(team, player, coach);
+        readRound(round);
+        break;
+    case 4:
+        menuSignUp(team, player, coach, match, round);
+        break;
 
     default:
         break;
     }
 }
-void menuSignUp(Node *team, Node *player, Node *coach)
+void menuSignUp(Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
     int op;
     system("clear");
@@ -165,23 +195,23 @@ void menuSignUp(Node *team, Node *player, Node *coach)
     switch (op)
     {
     case 0:
-        menuInclude(team, player, coach);
+        menuInclude(team, player, coach, match, round);
         break;
     case 1:
-        menuDelete(team, player, coach);
+        menuDelete(team, player, coach, match, round);
         break;
     case 2:
-        menuSearch(team, player, coach);
+        menuSearch(team, player, coach, match, round);
         break;
     case 3:
-        mainMenu(team, player, coach);
+        mainMenu(team, player, coach, match, round);
         break;
     default:
         exit(1);
         break;
     }
 }
-void menuNarration(Match *m, Node *team, Node *player, Node *coach)
+void menuNarration(Match *m, Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
     int op, min;
     char desc_throw[50];
@@ -198,19 +228,20 @@ void menuNarration(Match *m, Node *team, Node *player, Node *coach)
     switch (op)
     {
     case 0:
-        markGoal(m, team, player, coach);
+        markGoal(m, team, player, coach, match, round);
         break;
     case 1:
-        markFault(m, team, player, coach);
+        markFault(m, team, player, coach, match, round);
         break;
     case 2:
-        replacePlayer(m, team, player, coach);
+        replacePlayer(m, team, player, coach, match, round);
         break;
     }
 }
-void menuThrow(Match *m, Node *team, Node *player, Node *coach)
+void menuThrow(Match *m, Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
-    int op;
+    int op, id_round;
+    Round *r;
     system("clear");
     printf("\t\tNARRACAO\n");
     printf("0 - NARRAR LANCE\n1 - ENCERRAR PARTIDA\n");
@@ -219,7 +250,7 @@ void menuThrow(Match *m, Node *team, Node *player, Node *coach)
     switch (op)
     {
     case 0:
-        menuNarration(m, team, player, coach);
+        menuNarration(m, team, player, coach, match, round);
         break;
     case 1:
         if (m->goal_t1 > m->goal_t2)
@@ -231,13 +262,25 @@ void menuThrow(Match *m, Node *team, Node *player, Node *coach)
             m->t1->points += 1;
             m->t2->points += 1;
         }
-        mainMenu(team, player, coach);
+
+        match = insertEnd(match, m);
+
+        printf("DIGITE O ID DA RODADA A VINCULAR A PARTIDA:\n");
+        do
+        {
+            scanf("%d", &id_round);
+        } while (searchRound(round, id_round) == NULL);
+
+        r = searchRound(round, id_round);
+        registerMatch(r, m);
+        mainMenu(team, player, coach, match, round);
         break;
     default:
         break;
     }
 }
-void menuToTell(Node *team, Node *player, Node *coach)
+
+void menuToTell(Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
     int op1, id_player;
     Match *m;
@@ -245,7 +288,7 @@ void menuToTell(Node *team, Node *player, Node *coach)
     system("clear");
     printf("\t\tNARRACAO\n");
     printf("\tESCOLHER TIMES DA PARTIDA\n");
-    m = createMatch(team);
+    m = createMatch(team, match);
 
     system("clear");
     printf("\t\tNARRACAO\n");
@@ -304,41 +347,56 @@ void menuToTell(Node *team, Node *player, Node *coach)
             m->t2->selection = insertEnd(m->t2->selection, p);
         }
     }
-    menuThrow(m, team, player, coach);
+    menuThrow(m, team, player, coach, match, round);
 }
-void mainMenu(Node *team, Node *player, Node *coach)
+void mainMenu(Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
-    int op;
+    int op, op1;
     system("clear");
-    printf("\t\tCAMPEONATO RAIZ DE FUTEBOL\n");
+    printf("\t\tCAMPEONATO DE FUTEBOL\n");
     printf("0 - CADASTROS\n1 - NARRAR\n2 - RELATORIOS\n3 - Testes\n");
     scanf("%d", &op);
 
     switch (op)
     {
     case 0:
-        menuSignUp(team, player, coach);
+        menuSignUp(team, player, coach, match, round);
         break;
     case 1:
-        menuToTell(team, player, coach);
+        menuToTell(team, player, coach, match, round);
         break;
     case 2:
         exit(1);
         // menuReport();
         break;
     case 3:
-        showTeams(team);
-        showPlayers(player);
+        showRound(round);
+        // showTeams(team);
+        // showPlayers(player);
         // showCoachs(coach);
+        //showMatch(match);
         break;
 
     default:
         exit(1);
         break;
     }
+
+    printf("(1)VOLTAR (0)SAIR\n");
+    scanf("%d", &op1);
+    switch (op1)
+    {
+    case 0:
+        exit(1);
+        break;
+    case 1:
+        mainMenu(team, player, coach, match, round);
+    default:
+        break;
+    }
 }
 
-void markGoal(Match *m, Node *team, Node *player, Node *coach)
+void markGoal(Match *m, Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
     int id_player, id_team;
     Player *p;
@@ -371,9 +429,9 @@ void markGoal(Match *m, Node *team, Node *player, Node *coach)
             p->goal++;
         }
     }
-    menuThrow(m, team, player, coach);
+    menuThrow(m, team, player, coach, match, round);
 }
-void markFault(Match *m, Node *team, Node *player, Node *coach)
+void markFault(Match *m, Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
     int id_player, id_team, card_y, card_r;
     Player *p;
@@ -427,10 +485,10 @@ void markFault(Match *m, Node *team, Node *player, Node *coach)
                 p->card_y++;
         }
     }
-    menuThrow(m, team, player, coach);
+    menuThrow(m, team, player, coach, match, round);
 }
 
-void replacePlayer(Match *m, Node *team, Node *player, Node *coach)
+void replacePlayer(Match *m, Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
     int id_out, id_in, id_team;
     Player *p;
@@ -473,5 +531,5 @@ void replacePlayer(Match *m, Node *team, Node *player, Node *coach)
         p = searchPlayer(m->t2->players, id_in);
         m->t2->selection = insertEnd(m->t2->selection, p);
     }
-    menuThrow(m, team, player, coach);
+    menuThrow(m, team, player, coach, match, round);
 }

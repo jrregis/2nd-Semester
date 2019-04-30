@@ -15,6 +15,6 @@ Node *removePlayer(Node *players, int id);
 bool equalPlayer(void *player, int id);
 void printPlayer(void *palyer);
 void showPlayers(Node *head);
-void readPlayer(Node *team, Node *players, Node *coach);
+void readPlayer(Node *team, Node *players, Node *coach, Node *match, Node *round);
 
 #endif

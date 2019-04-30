@@ -7,7 +7,7 @@
 #include "coach.h"
 #include "match.h"
 
-Match *createMatch(Node *team_head)
+Match *createMatch(Node *team_head, Node *match)
 {
     Match *m = (Match *)malloc(sizeof(Match));
 
@@ -30,10 +30,11 @@ Match *createMatch(Node *team_head)
 
     m->t2 = searchTeam(team_head, id_t2);
 
-    printf("DIGITE O ID DA PARTIDA \n");
-    scanf("%d", &m->id_match);
-    printf("DIGITE O ID DA RODADA \n");
-    scanf("%d", &m->id_round);
+    do
+    {
+        printf("DIGITE O ID DA PARTIDA \n");
+        scanf("%d", &m->id_match);
+    } while (searchMatch(match, m->id_match));
 
     return m;
 }
@@ -43,9 +44,9 @@ void printMatch(void *match_head)
     Match *m = (Match *)match_head;
 
     printf("\n");
-    printf("RODADA: %d \n", m->id_round);
     printf("PARTIDA: %d \n", m->id_match);
     printf("%s vs %s \n", m->t1->name, m->t2->name);
+    printf("%d -- %d \n", m->goal_t1, m->goal_t2);
 }
 
 void showMatch(Node *head)

@@ -45,7 +45,7 @@ Coach *createCoach(char name[50], int id_coach)
     return c;
 }
 
-void readCoach(Node *team, Node *player, Node *coachs)
+void readCoach(Node *team, Node *player, Node *coachs, Node *match, Node *round)
 {
     char name[50];
     int id;
@@ -64,5 +64,5 @@ void readCoach(Node *team, Node *player, Node *coachs)
     insertEnd(coachs, createCoach(name, id));
 
     system("clear");
-    menuInclude(team, player, coachs);
+    menuInclude(team, player, coachs, match, round);
 }

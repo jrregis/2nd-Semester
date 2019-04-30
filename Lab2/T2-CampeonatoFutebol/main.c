@@ -7,6 +7,7 @@
 #include "coach.h"
 #include "match.h"
 #include "menu.h"
+#include "round.h"
 
 int main()
 {
@@ -14,6 +15,9 @@ int main()
     Node *match_head = createList();
     Node *player_head = createList();
     Node *coach_head = createList();
+    Node *round_head = createList();
+
+    round_head = insertEnd(round_head, createRound(1));
 
     Team *test;
     Match *m;
@@ -49,7 +53,7 @@ int main()
     player_head = insertEnd(player_head, createPlayer("Ronaldo", "Zg", 32, 12, 27));
     coach_head = insertEnd(coach_head, createCoach("TEC 1", 1));
 
-    mainMenu(team_head, player_head, coach_head);
+    mainMenu(team_head, player_head, coach_head, match_head, round_head);
 
     //////////////////////////////INSERÇÕES PARA TESTE RÁPIDO
     /* team_head = insertEnd(team_head, createTeam("Inter", "Beira Rio", "POA", 10, 10, 1998, 0));

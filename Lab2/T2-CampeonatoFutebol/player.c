@@ -44,15 +44,17 @@ Player *createPlayer(char name[50], char position[50], int age, int number, int 
     strcpy(p->positon, position);
     return p;
 }
-void readPlayer(Node *team, Node *players, Node *coach)
+void readPlayer(Node *team, Node *players, Node *coach, Node *match, Node *round)
 {
     char name[50], position[50];
     int age, number, id;
 
     printf("DIGITE O NOME DO JOGADOR: ");
     scanf("%s", name);
+    // fgets(name, 50, NULL);
 
-    printf("DIGITE A POSIÇÃO: ");
+    printf("DIGITE UMA DAS POSICOES ABAIXO:\n");
+    printf("GL-ZG-LE-LD-MC-ATA: ");
     scanf("%s", position);
 
     printf("DIGITE O NUMERO DO JOGADOR: ");
@@ -70,5 +72,5 @@ void readPlayer(Node *team, Node *players, Node *coach)
     insertEnd(players, createPlayer(name, position, age, number, id));
 
     system("clear");
-    menuInclude(team, players, coach);
+    menuInclude(team, players, coach, match, round);
 }

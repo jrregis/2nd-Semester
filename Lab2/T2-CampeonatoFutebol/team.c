@@ -50,8 +50,6 @@ Team *searchTeam(Node *team, int id)
 
 Team *createTeam(char name[50], char home[50], char city[50], int d, int m, int y, int id_team)
 {
-    // Node *new_node;
-
     Team *t = (Team *)malloc(sizeof(Team));
     strcpy(t->name, name);
     strcpy(t->home, home);
@@ -64,7 +62,7 @@ Team *createTeam(char name[50], char home[50], char city[50], int d, int m, int 
     return t;
 }
 
-void readTeam(Node *teams, Node *player, Node *coach)
+void readTeam(Node *teams, Node *player, Node *coach, Node *match, Node *round)
 {
     char name[50], home[50], city[50];
     int d, m, y, id;
@@ -91,7 +89,7 @@ void readTeam(Node *teams, Node *player, Node *coach)
 
     insertEnd(teams, createTeam(name, home, city, d, m, y, id));
     system("clear");
-    menuInclude(teams, player, coach);
+    menuInclude(teams, player, coach, match, round);
 }
 
 void registerPlayer(Team *team, Player *player)
