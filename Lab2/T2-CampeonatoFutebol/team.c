@@ -8,6 +8,33 @@
 #include "menu.h"
 #include "match.h"
 
+void printDataTeam(void *team)
+{
+    Team *t = (Team *)team;
+    printf("TIME: %s\n\tGOLS FEITOS: %d  -  GOLS SOFRIDOS: %d\n", t->name, t->goal_done, t->goal_conceded);
+    printf("\tFALTAS: %d\n\tCARTOES AMARELOS: %d\n\tCARTOES VERMELHOS: %d\n", t->fault, t->card_y, t->card_r);
+}
+
+void showDataTeam(Node *team)
+{
+    show(team, &printDataTeam);
+}
+void printRank(void *team)
+{
+    Team *t = (Team *)team;
+    printf("\nTIME : %s\nPONTOS: %d\n", t->name, t->points);
+}
+
+void showRank(Node *head)
+{
+    show(head, &printRank);
+}
+
+void incRank(Node *team)
+{
+    int len = lenList(team);
+}
+
 void printTeam(void *team)
 {
     Team *t = (Team *)team;
@@ -25,6 +52,8 @@ void printTeam(void *team)
     if (t->players != NULL)
         printf("\nJOGADORES DO TIME");
     showPlayers(t->players);
+    if (t->selection != NULL)
+        showPlayers(t->selection);
     printf("\n");
 }
 

@@ -38,6 +38,10 @@ Round *searchRound(Node *round, int id)
     return (Round *)searching(round, id, &equalRound);
 }
 
+Node *removeRound(Node *round, int id)
+{
+    return removeNode(round, id, &equalRound);
+}
 void printRound(void *round)
 {
     Round *r = (Round *)round;

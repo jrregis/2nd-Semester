@@ -10,80 +10,96 @@
 #include "menu.h"
 #include "round.h"
 
+void menuReport(Node *team, Node *player, Node *coach, Node *match, Node *round)
+{
+    int op;
+    system("clear");
+    printf("0 - ESTATISTICAS TIME\n1 - ESTATISTICAS JOGADORES\n2 - RANK TIMES\n3 - RANK JOGADORES\n4 - VOLTAR\n");
+    scanf("%d", &op);
+    switch (op)
+    {
+    case 0:
+        system("clear");
+        showDataTeam(team);
+        break;
+    case 1:
+        system("clear");
+        showDataPlayer(player);
+        break;
+    case 2:
+        system("clear");
+        printf("\t\tRANK TIMES\n");
+        showRank(team);
+        break;
+    case 3:
+        system("claer");
+        printf("RANK JOGADORES\n");
+        showRankPlayer(player);
+        break;
+    case 4:
+        mainMenu(team, player, coach, match, round);
+    default:
+        break;
+    }
+}
 void menuSearch(Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
-    int op, op1, id_team, id_player, id_coach, id_round;
-    Team *t;
-    Player *p;
-    Coach *c;
-    Round *r;
+    int op, op1, id;
 
     system("clear");
     printf("\t\tBUSCAR\n");
-    printf("0 - TIME\n1 - JOGADOR\n2 - TECNICO\n3 - RODADA\n4 - VOLTAR \n");
+    printf("0 - TIME\n1 - JOGADOR\n2 - TECNICO\n3 - RODADA\n4 - PARTIDA \n5 - VOLTAR \n");
     scanf("%d", &op);
 
     switch (op)
     {
     case 0:
-        printf("DIGITE A ID DO TIME A SER BUSCADO: ");
-        scanf("%d", &id_team);
-        t = searchTeam(team, id_team);
-        if (t != NULL)
-        {
-            printTeam(t);
-        }
+        id = readId(0);
+        if (searchTeam(team, id) != NULL)
+            printTeam(searchTeam(team, id));
         else
-        {
             printf("TIME NAO CADASTRADO\n");
-        }
         break;
     case 1:
-        printf("DIGITE A ID DO JOGADOR A SER BUSCADO: ");
-        scanf("%d", &id_player);
-        p = searchPlayer(player, id_player);
-        if (p != NULL)
-        {
-            printPlayer(p);
-        }
+        id = readId(1);
+        if (searchPlayer(player, id) != NULL)
+            printPlayer(searchPlayer(player, id));
         else
-        {
             printf("JOGADOR NAO CADASTRADO\n");
-        }
         break;
     case 2:
-        printf("DIGITE A ID DO TECNICO A SER BUSCADO: ");
-        scanf("%d", &id_coach);
-        c = searchCoach(coach, id_coach);
-        if (c != NULL)
-        {
-            printCoach(c);
-        }
+        id = readId(2);
+        if (searchCoach(coach, id) != NULL)
+            printCoach(searchCoach(coach, id));
         else
-        {
             printf("TECNICO NAO CADASTRADO\n");
-        }
         break;
     case 3:
-        printf("DIGITE A ID DA RODADA: ");
-        scanf("%d", &id_round);
-        r = searchRound(round, id_round);
-        if (r != NULL)
-        {
-            printRound(r);
-        }
+        id = readId(3);
+        if (searchRound(round, id) != NULL)
+            printRound(searchRound(round, id));
         else
-        {
             printf("RODADA NAO CADASTRADA\n");
-        }
         break;
     case 4:
+        id = readId(4);
+        if (searchMatch(match, id) != NULL)
+        {
+            printMatch(searchMatch(match, id));
+            printf("LANCES DA PARTIDA:\n");
+            showThrowOfMatch(searchMatch(match, id)->throw_s);
+        }
+        else
+            printf("PARTIDA NÃO CADASTRADA\n");
+        break;
+    case 5:
         menuSignUp(team, player, coach, match, round);
         break;
 
     default:
         break;
     }
+
     printf("(1)VOLTAR (0)SAIR\n");
     scanf("%d", &op1);
     switch (op1)
@@ -99,10 +115,10 @@ void menuSearch(Node *team, Node *player, Node *coach, Node *match, Node *round)
 }
 void menuDelete(Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
-    int op, id_team, id_player, id_coach, id_match;
+    int op, id;
     system("clear");
     printf("\t\tEXCLUIR\n");
-    printf("0 - TIME\n1 - JOGADOR\n2 - TECNICO\n3 - PARTIDA\n4 - VOLTAR\n");
+    printf("0 - TIME\n1 - JOGADOR\n2 - TECNICO\n3 - RODADA\n4- PARTIDA\n5 - VOLTAR\n");
     scanf("%d", &op);
 
     switch (op)
@@ -110,44 +126,43 @@ void menuDelete(Node *team, Node *player, Node *coach, Node *match, Node *round)
     case 0:
         do
         {
-            printf("DIGITE A ID DO TIME A SER EXCLUIDO: ");
-            scanf("%d", &id_team);
-        } while (searchTeam(team, id_team) == NULL);
+            id = readId(0);
+        } while (searchTeam(team, id) == NULL);
 
-        team = removeTeam(team, id_team);
-
+        team = removeTeam(team, id);
         break;
     case 1:
         do
         {
-            printf("DIGITE A ID DO JOGADOR A SER EXCLUIDO: ");
-            scanf("%d", &id_player);
-        } while (searchPlayer(player, id_player) == NULL);
+            id = readId(1);
+        } while (searchPlayer(player, id) == NULL);
 
-        player = removePlayer(player, id_player);
-
+        player = removePlayer(player, id);
         break;
     case 2:
         do
         {
-            printf("DIGITE A ID DO TECNICO A SER EXCLUIDO: ");
-            scanf("%d", &id_coach);
-        } while (searchCoach(coach, id_coach) == NULL);
+            id = readId(2);
+        } while (searchCoach(coach, id) == NULL);
 
-        coach = removeCoach(coach, id_coach);
-
+        coach = removeCoach(coach, id);
         break;
     case 3:
         do
         {
-            printf("DIGITE A ID DA PARTIDA A SER EXCLUIDA: ");
-            scanf("%d", &id_match);
-        } while (searchMatch(match, id_match) == NULL);
-
-        match = removeMatch(match, id_match);
-
+            id = readId(3);
+        } while (searchRound(round, id) == NULL);
+        round = removeRound(round, id);
         break;
     case 4:
+        do
+        {
+            id = readId(4);
+        } while (searchMatch(match, id) == NULL);
+
+        match = removeMatch(match, id);
+        break;
+    case 5:
         menuSignUp(team, player, coach, match, round);
 
     default:
@@ -188,7 +203,7 @@ void menuSignUp(Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
     int op;
     system("clear");
-    printf("\t\tCADATROS\n");
+    printf("\t\tCADASTROS\n");
     printf("0 - INCLUIR\n1 - EXCLUIR\n2 - BUSCAR\n3 - VOLTAR\n");
     scanf("%d", &op);
 
@@ -213,16 +228,12 @@ void menuSignUp(Node *team, Node *player, Node *coach, Node *match, Node *round)
 }
 void menuNarration(Match *m, Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
-    int op, min;
-    char desc_throw[50];
-    system("clear");
-    printf("\t\tNARRACAO\n");
-    printf("DIGITE O MIN DO LANCE: ");
-    scanf("%d", &min);
-    printf("DIGITE A DESCRICAO DO LANCE: ");
-    scanf("%s", desc_throw);
+    int op;
+    Throw *thorow_match;
+    thorow_match = readThrow();
+    m->throw_s = insertEnd(m->throw_s, thorow_match);
 
-    printf("0 - MARCAR GOL\n1 - MARCAR FALTA\n2 - FAZER SUBSTITUICAO\n");
+    printf("\n0 - MARCAR GOL\n1 - MARCAR FALTA\n2 - FAZER SUBSTITUICAO\n");
     scanf("%d", &op);
 
     switch (op)
@@ -284,74 +295,20 @@ void menuToTell(Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
     int op1, id_player;
     Match *m;
-    Player *p;
+
     system("clear");
     printf("\t\tNARRACAO\n");
     printf("\tESCOLHER TIMES DA PARTIDA\n");
     m = createMatch(team, match);
 
-    system("clear");
-    printf("\t\tNARRACAO\n");
-    printf("\tRELACIONAR JOGADORES DO %s\n", m->t1->name);
-    do
-    {
-        printf("RELACIONAR: 0-SIM 1-PRONTO\n");
-        scanf("%d", &op1);
-        if (op1 == 0)
-        {
-            printf("DIGITE A ID DO JOGADOR A SER RELACIONADO: ");
-            scanf("%d", &id_player);
-            registerPlayer(m->t1, searchPlayer(player, id_player));
-        }
+    listPlayerToMatch(m, player);
+    selectHeaderPlayers(m);
 
-    } while (op1 == 0);
-
-    system("clear");
-    printf("\t\tNARRACAO\n");
-    printf("\tRELACIONAR JOGADORES DO %s\n", m->t2->name);
-    do
-    {
-        printf("RELACIONAR: 0-SIM 1-PRONTO\n");
-        scanf("%d", &op1);
-        if (op1 == 0)
-        {
-            printf("DIGITE A ID DO JOGADOR A SER RELACIONADO: ");
-            scanf("%d", &id_player);
-            registerPlayer(m->t2, searchPlayer(player, id_player));
-        }
-
-    } while (op1 == 0);
-    system("clear");
-    printf("\t\tNARRACAO\n");
-    printf("\tESCALAR JOGADORES DO %s\n", m->t1->name);
-    for (int i = 0; i < 5; i++)
-    {
-        printf("DIGITE A ID DO JOGADOR A SER ESCALADO: ");
-        scanf("%d", &id_player);
-        if (searchPlayer(m->t1->players, id_player))
-        {
-            p = searchPlayer(m->t1->players, id_player);
-            m->t1->selection = insertEnd(m->t1->selection, p);
-        }
-    }
-    system("clear");
-    printf("\t\tNARRACAO\n");
-    printf("\tESCALAR JOGADORES DO %s\n", m->t2->name);
-    for (int i = 0; i < 5; i++)
-    {
-        printf("DIGITE A ID DO JOGADOR A SER ESCALADO: ");
-        scanf("%d", &id_player);
-        if (searchPlayer(m->t2->players, id_player))
-        {
-            p = searchPlayer(m->t2->players, id_player);
-            m->t2->selection = insertEnd(m->t2->selection, p);
-        }
-    }
     menuThrow(m, team, player, coach, match, round);
 }
 void mainMenu(Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
-    int op, op1;
+    int op, op1, i = 0;
     system("clear");
     printf("\t\tCAMPEONATO DE FUTEBOL\n");
     printf("0 - CADASTROS\n1 - NARRAR\n2 - RELATORIOS\n3 - Testes\n");
@@ -366,11 +323,11 @@ void mainMenu(Node *team, Node *player, Node *coach, Node *match, Node *round)
         menuToTell(team, player, coach, match, round);
         break;
     case 2:
-        exit(1);
-        // menuReport();
+        menuReport(team, player, coach, match, round);
         break;
     case 3:
-        showRound(round);
+
+        // showRound(round);
         // showTeams(team);
         // showPlayers(player);
         // showCoachs(coach);
@@ -399,8 +356,8 @@ void mainMenu(Node *team, Node *player, Node *coach, Node *match, Node *round)
 void markGoal(Match *m, Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
     int id_player, id_team;
-    Player *p;
-    printf("DIGITE A ID(%d / %d) DO TIME QUE MARCOU: ", m->t1->id_team, m->t2->id_team);
+
+    printf("DIGITE A ID(%s[%d] / %s[%d]) DO TIME QUE MARCOU: ", m->t1->name, m->t1->id_team, m->t2->name, m->t2->id_team);
     scanf("%d", &id_team);
     if (id_team == m->t1->id_team)
     {
@@ -408,12 +365,12 @@ void markGoal(Match *m, Node *team, Node *player, Node *coach, Node *match, Node
         m->t1->goal_done++;
         m->t2->goal_conceded++;
 
-        printf("DIGITE A ID DO JOGADOR QUE MARCOU: ");
+        printf("DIGITE A ID DO JOGADOR QUE MARCOU:\n ");
+        showHeaderPlayer(m->t1->selection);
         scanf("%d", &id_player);
-        if (searchPlayer(m->t1->selection, id_player))
+        if (searchPlayer(m->t1->selection, id_player) != NULL)
         {
-            p = searchPlayer(m->t1->selection, id_player);
-            p->goal++;
+            searchPlayer(m->t1->selection, id_player)->goal++;
         }
     }
     else
@@ -421,12 +378,12 @@ void markGoal(Match *m, Node *team, Node *player, Node *coach, Node *match, Node
         m->goal_t2++;
         m->t2->goal_done++;
         m->t1->goal_conceded++;
-        printf("DIGITE A ID DO JOGADOR QUE MARCOU: ");
+        printf("DIGITE A ID DO JOGADOR QUE MARCOU:\n ");
+        showHeaderPlayer(m->t2->selection);
         scanf("%d", &id_player);
         if (searchPlayer(m->t2->selection, id_player))
         {
-            p = searchPlayer(m->t2->selection, id_player);
-            p->goal++;
+            searchPlayer(m->t2->selection, id_player)->goal++;
         }
     }
     menuThrow(m, team, player, coach, match, round);
@@ -493,17 +450,23 @@ void replacePlayer(Match *m, Node *team, Node *player, Node *coach, Node *match,
     int id_out, id_in, id_team;
     Player *p;
 
-    printf("DIGITE A ID(%d / %d) DO TIME QUE FARA A ALTERACAO: ", m->t1->id_team, m->t2->id_team);
+    printf("DIGITE A ID(%s[%d] / %s[%d]) DO TIME QUE FARA A ALTERACAO: ", m->t1->name, m->t1->id_team, m->t2->name, m->t2->id_team);
     scanf("%d", &id_team);
 
     if (id_team == m->t1->id_team)
     {
+        printf("JOGADORES EM CAMPO\n");
+        showHeaderPlayer(m->t1->selection);
+
         do
         {
             printf("DIGITE A ID D JOGADOR QUE SAIRA: ");
             scanf("%d", &id_out);
         } while (searchPlayer(m->t1->selection, id_out) == NULL);
         m->t1->selection = removePlayer(m->t1->selection, id_out);
+
+        printf("JOGADORES NO BANCO\n");
+        showHeaderPlayer(m->t1->players);
 
         do
         {
@@ -512,16 +475,25 @@ void replacePlayer(Match *m, Node *team, Node *player, Node *coach, Node *match,
         } while (searchPlayer(m->t1->players, id_in) == NULL);
         p = searchPlayer(m->t1->players, id_in);
         m->t1->selection = insertEnd(m->t1->selection, p);
+
+        printf("TIME ATUAL:\n");
+        showHeaderPlayer(m->t1->selection);
     }
 
     else
     {
+        printf("JOGADORES EM CAMPO\n");
+        showHeaderPlayer(m->t2->selection);
+
         do
         {
             printf("DIGITE A ID D JOGADOR QUE SAIRA: ");
             scanf("%d", &id_out);
         } while (searchPlayer(m->t2->selection, id_out) == NULL);
         m->t2->selection = removePlayer(m->t2->selection, id_out);
+
+        printf("JOGADORES NO BANCO\n");
+        showHeaderPlayer(m->t2->players);
 
         do
         {
@@ -530,6 +502,131 @@ void replacePlayer(Match *m, Node *team, Node *player, Node *coach, Node *match,
         } while (searchPlayer(m->t2->players, id_in) == NULL);
         p = searchPlayer(m->t2->players, id_in);
         m->t2->selection = insertEnd(m->t2->selection, p);
+
+        printf("TIME ATUAL:\n");
+        showHeaderPlayer(m->t2->selection);
     }
+    sleep(5);
     menuThrow(m, team, player, coach, match, round);
+}
+
+int readId(int type)
+{
+    int id;
+    switch (type)
+    {
+    case 0:
+        printf("DIGITE A ID DO TIME: ");
+        scanf("%d", &id);
+        break;
+    case 1:
+        printf("DIGITE A ID DO JOGADOR: ");
+        scanf("%d", &id);
+        break;
+    case 2:
+        printf("DIGITE A ID DO TECNICO: ");
+        scanf("%d", &id);
+        break;
+    case 3:
+        printf("DIGITE A ID DA RODADA: ");
+        scanf("%d", &id);
+        break;
+    case 4:
+        printf("DIGITE A ID DA PARTIDA: ");
+        scanf("%d", &id);
+    default:
+        break;
+    }
+    return id;
+}
+
+Throw *readThrow(void)
+{
+    Throw *t = (Throw *)malloc(sizeof(Throw));
+
+    system("clear");
+    printf("\t\tNARRACAO\n");
+    printf("DIGITE O MIN DO LANCE: ");
+    scanf("%d", &t->min);
+    printf("DIGITE A DESCRICAO DO LANCE: ");
+    scanf("%s", t->desc_throw);
+    return t;
+}
+
+void listPlayerToMatch(Match *m, Node *player)
+{
+    int op1, id_player;
+    system("clear");
+    printf("\t\tNARRACAO\n");
+    printf("\tRELACIONAR JOGADORES DO %s\n", m->t1->name);
+    do
+    {
+        printf("RELACIONAR: 0-SIM 1-PRONTO\n");
+        scanf("%d", &op1);
+        if (op1 == 0)
+        {
+            printf("DIGITE A ID DO JOGADOR A SER RELACIONADO: ");
+            scanf("%d", &id_player);
+            if (searchPlayer(player, id_player) != NULL)
+                registerPlayer(m->t1, searchPlayer(player, id_player));
+        }
+
+    } while (op1 == 0);
+
+    system("clear");
+    printf("\t\tNARRACAO\n");
+    printf("\tRELACIONAR JOGADORES DO %s\n", m->t2->name);
+
+    do
+    {
+        printf("RELACIONAR: 0-SIM 1-PRONTO\n");
+        scanf("%d", &op1);
+        if (op1 == 0)
+        {
+            printf("DIGITE A ID DO JOGADOR A SER RELACIONADO: ");
+            scanf("%d", &id_player);
+            if (searchPlayer(player, id_player) != NULL && searchPlayer(m->t1->players, id_player) == NULL)
+                registerPlayer(m->t2, searchPlayer(player, id_player));
+        }
+
+    } while (op1 == 0);
+}
+
+void selectHeaderPlayers(Match *m)
+{
+    int id_player;
+
+    system("clear");
+    printf("\t\tNARRACAO\n");
+    printf("\tESCALAR JOGADORES DO %s\n", m->t1->name);
+    for (int i = 0; i < 5; i++)
+    {
+        printf("DIGITE A ID DO JOGADOR A SER ESCALADO: ");
+        scanf("%d", &id_player);
+        if (searchPlayer(m->t1->players, id_player))
+        {
+            m->t1->selection = insertEnd(m->t1->selection, searchPlayer(m->t1->players, id_player));
+            m->t1->players = removePlayer(m->t1->players, id_player);
+        }
+    }
+    system("clear");
+    printf("\t\tNARRACAO\n");
+    printf("\tESCALAR JOGADORES DO %s\n", m->t2->name);
+    for (int i = 0; i < 5; i++)
+    {
+        printf("DIGITE A ID DO JOGADOR A SER ESCALADO: ");
+        scanf("%d", &id_player);
+        if (searchPlayer(m->t2->players, id_player))
+        {
+            m->t2->selection = insertEnd(m->t2->selection, searchPlayer(m->t2->players, id_player));
+            m->t2->players = removePlayer(m->t2->players, id_player);
+        }
+    }
+}
+
+void reportRank(Node *team)
+{
+    Node *aux;
+
+    int more_than;
 }

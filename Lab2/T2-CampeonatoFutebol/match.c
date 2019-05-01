@@ -39,6 +39,11 @@ Match *createMatch(Node *team_head, Node *match)
     return m;
 }
 
+void printThrowOfMatch(void *match_head)
+{
+    Match *m = (Match *)match_head;
+    printf("MIN: %d - %s \n", ((Throw *)m)->min, ((Throw *)m)->desc_throw);
+}
 void printMatch(void *match_head)
 {
     Match *m = (Match *)match_head;
@@ -52,6 +57,11 @@ void printMatch(void *match_head)
 void showMatch(Node *head)
 {
     show(head, &printMatch);
+}
+
+void showThrowOfMatch(Node *head)
+{
+    show(head, &printThrowOfMatch);
 }
 
 bool equalMatch(void *match, int id)

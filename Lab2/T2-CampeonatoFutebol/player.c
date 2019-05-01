@@ -7,10 +7,45 @@
 #include "coach.h"
 #include "menu.h"
 
+void printRankPlayer(void *player)
+{
+    Player *p = (Player *)player;
+    printf("%d - %s \tGOLS: %d\n", p->id_player, p->name, p->goal);
+}
+
+void showRankPlayer(Node *player)
+{
+    show(player, &printRankPlayer);
+}
+void printDataPlayer(void *player)
+{
+    Player *p = (Player *)player;
+    printf("%d - %s\n\tGOLS: %d\n\tCARTOES AMARELOS:    %d", p->id_player, p->name, p->goal, p->card_y);
+    printf("\n\tCARTOES VERMELHOS : % d\n\tFALTAS COMETIDAS :   %d\n ", p->card_r, p->fault);
+}
+
+void showDataPlayer(Node *player)
+{
+    show(player, &printDataPlayer);
+}
+
+void printHeaderPLayer(void *player)
+{
+    Player *p = (Player *)player;
+    printf("%s - %d\n", p->name, p->id_player);
+}
+
+void showHeaderPlayer(Node *player)
+{
+    show(player, &printHeaderPLayer);
+}
+
 void printPlayer(void *player)
 {
     Player *p = (Player *)player;
-    printf("\nID: %d NOME: %s \nPOSICAO %s \nCAMISA: %d IDADE %d\nGOLS: %d\nFALTAS: %d\nAMARELOS: %d\nVERMELHOS: %d\n", p->id_player, p->name, p->positon, p->number, p->age, p->goal, p->fault, p->card_y, p->card_r);
+    printf("\nID: %d NOME: %s \nPOSICAO %s\n", p->id_player, p->name, p->positon);
+    printf("CAMISA: %d IDADE %d\nGOLS: %d\n", p->number, p->age, p->goal);
+    printf("FALTAS: %d\nAMARELOS: %d\nVERMELHOS: %d\n", p->fault, p->card_y, p->card_r);
 }
 void showPlayers(Node *players)
 {
@@ -51,7 +86,6 @@ void readPlayer(Node *team, Node *players, Node *coach, Node *match, Node *round
 
     printf("DIGITE O NOME DO JOGADOR: ");
     scanf("%s", name);
-    // fgets(name, 50, NULL);
 
     printf("DIGITE UMA DAS POSICOES ABAIXO:\n");
     printf("GL-ZG-LE-LD-MC-ATA: ");

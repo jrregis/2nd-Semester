@@ -15,6 +15,7 @@ Node *insertTop(Node *head, void *element); //INSERE UM ELEMENTO NO COMECO DA LI
 Node *freeList(Node *head);                 //LIBERA A LISTA DA MEMORIA
 Node *lastNode(Node *head);                 //ACHA O ULTIMO NO DA LISTA
 
+int lenList(Node *head);
 void show(Node *head, void showElement(void *));               //RECEBE A LISTA E UM PONTEIRO PARA IMPRIMIR CADA ELEMENTO DA LISTA NA showElement()
 void *searching(Node *head, int id, bool equal(void *, int));  //RECEBE A LISTA E UM PONTEIRO PARA UMA FUNCAO QUE COMPORA DOIS ELEMENTO DA LISTA
 Node *removeNode(Node *head, int id, bool equal(void *, int)); //RECEBE A LISTA E UM PONTEIRO PARA UMA FUNCAO QUE COMPORA DOIS ELEMENTO DA LISTA

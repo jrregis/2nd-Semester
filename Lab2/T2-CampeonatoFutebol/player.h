@@ -16,5 +16,11 @@ bool equalPlayer(void *player, int id);
 void printPlayer(void *palyer);
 void showPlayers(Node *head);
 void readPlayer(Node *team, Node *players, Node *coach, Node *match, Node *round);
+void showHeaderPlayer(Node *player);
+void printHeaderPLayer(void *player);
+void showDataPlayer(Node *player);
+void printDataPlayer(void *player);
+void printRankPlayer(void *player);
+void showRankPlayer(Node *player);
 
 #endif

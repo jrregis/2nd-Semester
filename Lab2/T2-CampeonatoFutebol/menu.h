@@ -18,4 +18,12 @@ void markGoal(Match *m, Node *team, Node *player, Node *coach, Node *match, Node
 void markFault(Match *m, Node *team, Node *player, Node *coach, Node *match, Node *round);
 void replacePlayer(Match *m, Node *team, Node *player, Node *coach, Node *match, Node *round);
 void playerOut(Match *m, Node *team, Node *player, Node *coach, Node *match, Node *round);
+
+int readId(int type);
+Throw *readThrow(void);
+void listPlayerToMatch(Match *m, Node *player);
+void selectHeaderPlayers(Match *m);
+
+void menuReport(Node *team, Node *player, Node *coach, Node *match, Node *round);
+
 #endif

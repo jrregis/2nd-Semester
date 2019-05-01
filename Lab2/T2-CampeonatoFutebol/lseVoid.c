@@ -114,3 +114,15 @@ Node *freeList(Node *head)
     }
     return NULL;
 }
+
+int lenList(Node *head)
+{
+    int i = 0;
+    Node *tmp = head;
+    while (tmp != NULL)
+    {
+        i++;
+        tmp = tmp->next;
+    }
+    return i;
+}

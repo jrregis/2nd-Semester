@@ -4,7 +4,7 @@
 
 typedef struct
 {
-    char desc_throw;
+    char desc_throw[30];
     int min;
 
 } Throw;
@@ -21,4 +21,7 @@ void printMatch(void *match_head);
 void showMatch(Node *head);
 Match *searchMatch(Node *match, int id);
 Node *removeMatch(Node *match, int id);
+
+void printThrowOfMatch(void *match_head);
+void showThrowOfMatch(Node *head);
 #endif
