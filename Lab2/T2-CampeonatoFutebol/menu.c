@@ -315,7 +315,7 @@ void mainMenu(Node *team, Node *player, Node *coach, Node *match, Node *round)
     int op, op1, i = 0;
     system("clear");
     printf("\t\tCAMPEONATO DE FUTEBOL\n");
-    printf("0 - CADASTROS\n1 - NARRAR\n2 - RELATORIOS\n3 - Testes\n");
+    printf("0 - CADASTROS\n1 - NARRAR\n2 - RELATORIOS\n3 - SAIR\n");
     scanf("%d", &op);
 
     switch (op)
@@ -330,30 +330,27 @@ void mainMenu(Node *team, Node *player, Node *coach, Node *match, Node *round)
         menuReport(team, player, coach, match, round);
         break;
     case 3:
-
-        // showRound(round);
-        // showTeams(team);
-        // showPlayers(player);
-        // showCoachs(coach);
-        //showMatch(match);
+        exitProgram(team, player, coach, match, round);
         break;
 
     default:
         exit(1);
         break;
     }
-
-    printf("(1)VOLTAR (0)SAIR\n");
-    scanf("%d", &op1);
-    switch (op1)
+    if (op != 3)
     {
-    case 0:
-        exit(1);
-        break;
-    case 1:
-        mainMenu(team, player, coach, match, round);
-    default:
-        break;
+        printf("(1)VOLTAR (0)SAIR\n");
+        scanf("%d", &op1);
+        switch (op1)
+        {
+        case 0:
+            exitProgram(team, player, coach, match, round);
+            break;
+        case 1:
+            mainMenu(team, player, coach, match, round);
+        default:
+            break;
+        }
     }
 }
 
@@ -572,7 +569,7 @@ void listPlayerToMatch(Match *m, Node *player)
         {
             printf("DIGITE A ID DO JOGADOR A SER RELACIONADO: ");
             scanf("%d", &id_player);
-            if (searchPlayer(player, id_player) != NULL)
+            if (searchPlayer(player, id_player) != NULL && searchPlayer(m->t2->players, id_player) == NULL)
                 registerPlayer(m->t1, searchPlayer(player, id_player));
         }
 
@@ -663,4 +660,18 @@ void bubble_sort(Node *head, int op)
         }
         head = head->next;
     }
+}
+
+void exitProgram(Node *team, Node *player, Node *coach, Node *match, Node *round)
+{
+    freeList(team);
+    printf("LISTA DE TIMES LIBERADA\n");
+    freeList(player);
+    printf("LISTA DE JOGADORES LIBERADA\n");
+    freeList(coach);
+    printf("LISTA DE TECNICOS LIBERADA\n");
+    freeList(match);
+    printf("LISTA DE PARTIDAS LIBERADA\n");
+    freeList(round);
+    printf("LISTA DE RODADAS LIBERADA\n");
 }

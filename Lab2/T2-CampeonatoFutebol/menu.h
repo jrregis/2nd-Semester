@@ -23,6 +23,7 @@ Throw *readThrow(void);                         //LÊ OS LANCES
 void listPlayerToMatch(Match *m, Node *player); //RELACIONA JOGADORES DA LISTA DE JOGADORES À PARTIDA
 void selectHeaderPlayers(Match *m);             //ESCALA TIME TITULAR
 
-void menuReport(Node *team, Node *player, Node *coach, Node *match, Node *round); //MENU DE RELATÓRIOS
-void bubble_sort(Node *head, int op);                                             //ORDENA TIMES POR PONTOS E JOGADORES POR GOLS
+void menuReport(Node *team, Node *player, Node *coach, Node *match, Node *round);  //MENU DE RELATÓRIOS
+void bubble_sort(Node *head, int op);                                              //ORDENA TIMES POR PONTOS E JOGADORES POR GOLS
+void exitProgram(Node *team, Node *player, Node *coach, Node *match, Node *round); //LIBERA TODAS AS LISTAS
 #endif
