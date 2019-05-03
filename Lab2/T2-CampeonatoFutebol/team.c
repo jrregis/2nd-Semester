@@ -30,11 +30,6 @@ void showRank(Node *head)
     show(head, &printRank);
 }
 
-void incRank(Node *team)
-{
-    int len = lenList(team);
-}
-
 void printTeam(void *team)
 {
     Team *t = (Team *)team;
@@ -42,12 +37,6 @@ void printTeam(void *team)
     printf("%d - %s\n", t->id_team, t->name);
     printf("%s, %s\n", t->home, t->city);
     printf("%d/%d/%d\n", t->d, t->m, t->y);
-    printf("GOLS FEITOS: %d\n", t->goal_done);
-    printf("GOLS SOFRIDOS: %d\n", t->goal_conceded);
-    printf("FALTAS COMETIDAS: %d\n", t->fault);
-    printf("AMARELOS: %d\n", t->card_y);
-    printf("VERMELHOS: %d\n", t->card_r);
-    printf("PONTOS: %d\n", t->points);
 
     if (t->players != NULL)
         printf("\nJOGADORES DO TIME");
@@ -91,19 +80,28 @@ Team *createTeam(char name[50], char home[50], char city[50], int d, int m, int 
     return t;
 }
 
+Team *createTeamP(char name[50], char home[50], char city[50], int d, int m, int y, int id_team, int point)
+{
+    Team *t = createTeam(name, home, city, d, m, y, id_team);
+    t->points = point;
+    return t;
+}
 void readTeam(Node *teams, Node *player, Node *coach, Node *match, Node *round)
 {
-    char name[50], home[50], city[50];
+    char name[50], home[50], city[50], temp;
     int d, m, y, id;
 
     printf("DIGITE O NOME DO TIME: ");
-    scanf("%s", name);
+    scanf("%c", &temp);
+    scanf("%[^\n]", name);
 
     printf("DIGITE O NOME DO ESTADIO: ");
-    scanf("%s", home);
+    scanf("%c", &temp);
+    scanf("%[^\n]", home);
 
     printf("DIGITE O NOME DA CIDADE DO TIME: ");
-    scanf("%s", city);
+    scanf("%c", &temp);
+    scanf("%[^\n]", city);
 
     printf("DIGITE O DIA DA FUNDAÇÃO DO TIME(DD/MM/YYYY): ");
     scanf("%d/%d/%d", &d, &m, &y);

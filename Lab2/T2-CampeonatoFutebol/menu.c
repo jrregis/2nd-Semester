@@ -12,7 +12,9 @@
 
 void menuReport(Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
-    int op;
+    int op, len = 0;
+    Node *show_team;
+
     system("clear");
     printf("0 - ESTATISTICAS TIME\n1 - ESTATISTICAS JOGADORES\n2 - RANK TIMES\n3 - RANK JOGADORES\n4 - VOLTAR\n");
     scanf("%d", &op);
@@ -28,11 +30,13 @@ void menuReport(Node *team, Node *player, Node *coach, Node *match, Node *round)
         break;
     case 2:
         system("clear");
+        bubble_sort(team, 0);
         printf("\t\tRANK TIMES\n");
         showRank(team);
         break;
     case 3:
-        system("claer");
+        system("clear");
+        bubble_sort(player, 1);
         printf("RANK JOGADORES\n");
         showRankPlayer(player);
         break;
@@ -543,13 +547,14 @@ int readId(int type)
 Throw *readThrow(void)
 {
     Throw *t = (Throw *)malloc(sizeof(Throw));
-
+    char temp;
     system("clear");
     printf("\t\tNARRACAO\n");
     printf("DIGITE O MIN DO LANCE: ");
     scanf("%d", &t->min);
     printf("DIGITE A DESCRICAO DO LANCE: ");
-    scanf("%s", t->desc_throw);
+    scanf("%c", &temp);
+    scanf("%[^\n]", t->desc_throw);
     return t;
 }
 
@@ -629,4 +634,33 @@ void reportRank(Node *team)
     Node *aux;
 
     int more_than;
+}
+
+void bubble_sort(Node *head, int op)
+{
+    struct Node *tmp = createList(), *store = head;
+    void *swap_data;
+
+    while (head != NULL)
+    {
+        tmp = store;
+        while (tmp != NULL)
+        {
+            if (tmp->next && ((Team *)tmp->info)->points < ((Team *)tmp->next->info)->points && op == 0)
+            {
+                swap_data = tmp->info;
+                tmp->info = tmp->next->info;
+                tmp->next->info = swap_data;
+            }
+
+            if (tmp->next && ((Player *)tmp->info)->goal < ((Player *)tmp->next->info)->goal && op == 1)
+            {
+                swap_data = tmp->info;
+                tmp->info = tmp->next->info;
+                tmp->next->info = swap_data;
+            }
+            tmp = tmp->next;
+        }
+        head = head->next;
+    }
 }

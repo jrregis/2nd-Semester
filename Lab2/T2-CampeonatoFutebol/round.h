@@ -9,11 +9,11 @@ typedef struct
     Node *match;
 } Round;
 
-Round *createRound(int id_round);
-void readRound(Node *round);
-Round *searchRound(Node *round, int id);
-void registerMatch(Round *round, Match *m);
-void showRound(Node *head);
+Round *createRound(int id_round);           //ALOCA INFORMAÇÕES DO TIPO RODADA
+void readRound(Node *round);                //LE A RODADA
+Round *searchRound(Node *round, int id);    //PROCURA A RODADA
+void registerMatch(Round *round, Match *m); //INSERE PARTIDA NA RODADA
+void showRound(Node *head);                 //MOSTRA A RODADA COM SUAS PARTIDAS
 void printRound(void *round);
-Node *removeRound(Node *round, int id);
+Node *removeRound(Node *round, int id); //DELETA RODADA
 #endif

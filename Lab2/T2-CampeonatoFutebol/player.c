@@ -10,7 +10,7 @@
 void printRankPlayer(void *player)
 {
     Player *p = (Player *)player;
-    printf("%d - %s \tGOLS: %d\n", p->id_player, p->name, p->goal);
+    printf("%d\t- %s \tGOLS: %d\n", p->id_player, p->name, p->goal);
 }
 
 void showRankPlayer(Node *player)
@@ -44,8 +44,7 @@ void printPlayer(void *player)
 {
     Player *p = (Player *)player;
     printf("\nID: %d NOME: %s \nPOSICAO %s\n", p->id_player, p->name, p->positon);
-    printf("CAMISA: %d IDADE %d\nGOLS: %d\n", p->number, p->age, p->goal);
-    printf("FALTAS: %d\nAMARELOS: %d\nVERMELHOS: %d\n", p->fault, p->card_y, p->card_r);
+    printf("CAMISA: %d IDADE %d\n", p->number, p->age);
 }
 void showPlayers(Node *players)
 {
@@ -78,6 +77,12 @@ Player *createPlayer(char name[50], char position[50], int age, int number, int 
     strcpy(p->name, name);
     strcpy(p->positon, position);
     return p;
+}
+
+Player *createPlayerG(char name[50], char position[50], int age, int number, int id_player, int goal)
+{
+    Player *p = createPlayer(name, position, age, number, id_player);
+    p->goal = goal;
 }
 void readPlayer(Node *team, Node *players, Node *coach, Node *match, Node *round)
 {

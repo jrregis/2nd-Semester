@@ -11,17 +11,17 @@ typedef struct
     Node *players, *selection;
 } Team;
 
-Team *createTeam(char name[50], char home[50], char city[50], int d, int m, int y, int id_team);
-Team *searchTeam(Node *teams, int id);
-Node *removeTeam(Node *teams, int id);
+Team *createTeam(char name[50], char home[50], char city[50], int d, int m, int y, int id_team);             //ALOCA INFORMAÇÕES DO TIPO RODADA SEM PONTOS
+Team *createTeamP(char name[50], char home[50], char city[50], int d, int m, int y, int id_team, int point); //ALOCA INFORMAÇÕES DO TIPO RODADA COM PONTOS
+Team *searchTeam(Node *teams, int id);                                                                       //BUSCA TIME
+Node *removeTeam(Node *teams, int id);                                                                       //REMOVE TIME
 void printDataTeam(void *team);
 void printTeam(void *team);
-void showDataTeam(Node *team);
+void showDataTeam(Node *team); //MOSTRA ESTATISTICAS DOS TIMES
 void printRank(void *team);
-void showRank(Node *head);
-void showTeams(Node *head);
-void readTeam(Node *teams, Node *player, Node *coach, Node *match, Node *round);
-void registerPlayer(Team *team, Player *player);
-void unregisterPlayer(Team *team, int id);
-
+void showRank(Node *head);                                                       //MOSTRA RANK DOS TIMES
+void showTeams(Node *head);                                                      //MOSTRA OS TIMES
+void readTeam(Node *teams, Node *player, Node *coach, Node *match, Node *round); //LE ENTRADA DE TIME
+void registerPlayer(Team *team, Player *player);                                 //INCLUI JOGADOR NO TIME
+void unregisterPlayer(Team *team, int id);                                       //REMOVE JOGADOR DO TIME
 #endif

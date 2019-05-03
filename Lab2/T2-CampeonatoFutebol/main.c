@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <string.h>
 #include "lseVoid.h"
 #include "team.h"
@@ -16,99 +17,29 @@ int main()
     Node *player_head = createList();
     Node *coach_head = createList();
     Node *round_head = createList();
+    Team *t;
+    Player *p;
+    Coach *c;
+    //NAVEGAÇÃO EH FEITA PELOS MENUS ESSAS PRIMEIRAS INSERÇÕES FORAM FEITAS PARA AGILIZAR OS TESTES
+    //CRIA NÓS NA LISTA DE TIMES COM PONTOS
+    team_head = insertEnd(team_head, createTeamP("Real", "Estadio do Real", "Madrid", 10, 10, 1998, 1, 3));
+    team_head = insertEnd(team_head, createTeamP("Porto", "Estadio do Porto", "Porto", 10, 10, 1998, 2, 2));
+    team_head = insertEnd(team_head, createTeamP("Inter", "Beira Rio", "Porto Alegre", 10, 10, 1998, 0, 4));
+    team_head = insertEnd(team_head, createTeamP("Gremio", "Arena da OAS", "Porto Alegre", 10, 10, 1998, 3, 6));
+    team_head = insertEnd(team_head, createTeamP("Brasil", "Estadio do Brasil", "Cidades Brasileiras", 10, 10, 1998, 4, 9));
 
-    round_head = insertEnd(round_head, createRound(1));
-
-    Team *test;
-    Match *m;
-    team_head = insertEnd(team_head, createTeam("Inter", "Beira Rio", "POA", 10, 10, 1998, 0));
-    team_head = insertEnd(team_head, createTeam("Real", "NameEstadio", "NameCidade", 10, 10, 1998, 1));
-    player_head = insertEnd(player_head, createPlayer("Joao", "Ata", 20, 10, 0));
-    player_head = insertEnd(player_head, createPlayer("Maria", "Lte", 25, 15, 1));
-    player_head = insertEnd(player_head, createPlayer("Jose", "Ltd", 29, 12, 2));
-    player_head = insertEnd(player_head, createPlayer("Ronaldo", "Zg", 32, 12, 3));
-    player_head = insertEnd(player_head, createPlayer("Joao", "Ata", 20, 10, 4));
-    player_head = insertEnd(player_head, createPlayer("Maria", "Lte", 25, 15, 5));
-    player_head = insertEnd(player_head, createPlayer("Jose", "Ltd", 29, 12, 6));
-    player_head = insertEnd(player_head, createPlayer("Ronaldo", "Zg", 32, 12, 7));
-    player_head = insertEnd(player_head, createPlayer("Joao", "Ata", 20, 10, 8));
-    player_head = insertEnd(player_head, createPlayer("Maria", "Lte", 25, 15, 9));
-    player_head = insertEnd(player_head, createPlayer("Jose", "Ltd", 29, 12, 10));
-    player_head = insertEnd(player_head, createPlayer("Ronaldo", "Zg", 32, 12, 11));
-    player_head = insertEnd(player_head, createPlayer("Joao", "Ata", 20, 10, 12));
-    player_head = insertEnd(player_head, createPlayer("Maria", "Lte", 25, 15, 13));
-    player_head = insertEnd(player_head, createPlayer("Jose", "Ltd", 29, 12, 14));
-    player_head = insertEnd(player_head, createPlayer("Ronaldo", "Zg", 32, 12, 15));
-    player_head = insertEnd(player_head, createPlayer("Joao", "Ata", 20, 10, 16));
-    player_head = insertEnd(player_head, createPlayer("Maria", "Lte", 25, 15, 17));
-    player_head = insertEnd(player_head, createPlayer("Jose", "Ltd", 29, 12, 18));
-    player_head = insertEnd(player_head, createPlayer("Ronaldo", "Zg", 32, 12, 19));
-    player_head = insertEnd(player_head, createPlayer("Joao", "Ata", 20, 10, 20));
-    player_head = insertEnd(player_head, createPlayer("Maria", "Lte", 25, 15, 21));
-    player_head = insertEnd(player_head, createPlayer("Jose", "Ltd", 29, 12, 22));
-    player_head = insertEnd(player_head, createPlayer("Ronaldo", "Zg", 32, 12, 23));
-    player_head = insertEnd(player_head, createPlayer("Joao", "Ata", 20, 10, 24));
-    player_head = insertEnd(player_head, createPlayer("Maria", "Lte", 25, 15, 25));
-    player_head = insertEnd(player_head, createPlayer("Jose", "Ltd", 29, 12, 26));
-    player_head = insertEnd(player_head, createPlayer("Ronaldo", "Zg", 32, 12, 27));
-    coach_head = insertEnd(coach_head, createCoach("TEC 1", 1));
+    //CRIA 15 NÓS NA LISTA DE JOGADORES COM IDADES, GOLS, NUMERO CAMISETA ALEATÓRIOS
+    srand(time(NULL));
+    for (int i = 0; i < 15; i++)
+    {
+        int age = rand() % 30;
+        int number = rand() % 25;
+        int goal = rand() % 50;
+        player_head = insertEnd(player_head, createPlayerG("Nome Jogador", "Ata", age, number, i, goal));
+    }
+    //CRIA TECNICOS NA LISTA DE TÉCNICOS PARA TESTE
+    for (int i = 0; i < 4; i++)
+        coach_head = insertEnd(coach_head, createCoach("Nome do Tecnico", i));
 
     mainMenu(team_head, player_head, coach_head, match_head, round_head);
-
-    //////////////////////////////INSERÇÕES PARA TESTE RÁPIDO
-    /* team_head = insertEnd(team_head, createTeam("Inter", "Beira Rio", "POA", 10, 10, 1998, 0));
-    team_head = insertEnd(team_head, createTeam("Time 1", "Estadio 1", "Cidade 1", 1, 1, 1999, 1));
-    team_head = insertEnd(team_head, createTeam("Time 2", "Estadio 2", "Cidade 2", 05, 03, 2010, 2));
-    team_head = insertEnd(team_head, createTeam("Time 3", "Estadio 3", "Cidade 3", 05, 03, 2010, 3));
-
-    Node *player_head = createList();
-    Player *p;
-    player_head = insertEnd(player_head, createPlayer("Joao", "Ata", 20, 10, 0));
-    player_head = insertEnd(player_head, createPlayer("Maria", "Lte", 25, 15, 1));
-    player_head = insertEnd(player_head, createPlayer("Jose", "Ltd", 29, 12, 2));
-    player_head = insertEnd(player_head, createPlayer("Ronaldo", "Zg", 32, 12, 3));
-    player_head = insertEnd(player_head, createPlayer("Joao", "Ata", 20, 10, 4));
-    player_head = insertEnd(player_head, createPlayer("Maria", "Lte", 25, 15, 5));
-    player_head = insertEnd(player_head, createPlayer("Jose", "Ltd", 29, 12, 6));
-    player_head = insertEnd(player_head, createPlayer("Ronaldo", "Zg", 32, 12, 7));
-    player_head = insertEnd(player_head, createPlayer("Joao", "Ata", 20, 10, 8));
-    player_head = insertEnd(player_head, createPlayer("Maria", "Lte", 25, 15, 9));
-    player_head = insertEnd(player_head, createPlayer("Jose", "Ltd", 29, 12, 10));
-    player_head = insertEnd(player_head, createPlayer("Ronaldo", "Zg", 32, 12, 11));
-    player_head = insertEnd(player_head, createPlayer("Joao", "Ata", 20, 10, 12));
-    player_head = insertEnd(player_head, createPlayer("Maria", "Lte", 25, 15, 13));
-    player_head = insertEnd(player_head, createPlayer("Jose", "Ltd", 29, 12, 14));
-    player_head = insertEnd(player_head, createPlayer("Ronaldo", "Zg", 32, 12, 15));
-    player_head = insertEnd(player_head, createPlayer("Joao", "Ata", 20, 10, 16));
-    player_head = insertEnd(player_head, createPlayer("Maria", "Lte", 25, 15, 17));
-    player_head = insertEnd(player_head, createPlayer("Jose", "Ltd", 29, 12, 18));
-    player_head = insertEnd(player_head, createPlayer("Ronaldo", "Zg", 32, 12, 19));
-    player_head = insertEnd(player_head, createPlayer("Joao", "Ata", 20, 10, 20));
-    player_head = insertEnd(player_head, createPlayer("Maria", "Lte", 25, 15, 21));
-    player_head = insertEnd(player_head, createPlayer("Jose", "Ltd", 29, 12, 22));
-    player_head = insertEnd(player_head, createPlayer("Ronaldo", "Zg", 32, 12, 23));
-    player_head = insertEnd(player_head, createPlayer("Joao", "Ata", 20, 10, 24));
-    player_head = insertEnd(player_head, createPlayer("Maria", "Lte", 25, 15, 25));
-    player_head = insertEnd(player_head, createPlayer("Jose", "Ltd", 29, 12, 26));
-    player_head = insertEnd(player_head, createPlayer("Ronaldo", "Zg", 32, 12, 27));
-
-    Node *coach_head = createList();
-    Coach *c;
-    coach_head = insertEnd(coach_head, createCoach("TEC 1", 1));
-    coach_head = insertEnd(coach_head, createCoach("TEC 2", 2));
-    coach_head = insertEnd(coach_head, createCoach("TEC 3", 3));
-
-    test = searchTeam(team_head, 0);
-
-    for (int i = 0; i <= 26; i++)
-        registerPlayer(test, searchPlayer(player_head, i));
-
-    printf("APOS INCLUIR NO TIME\n");
-    showTeams(team_head);
-
-    unregisterPlayer(test, 2);
-    unregisterPlayer(test, 0);
-    printf("APOS EXCLUIR DO TIME\n");
-    showTeams(team_head);
-    */
 }
