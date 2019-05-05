@@ -79,13 +79,14 @@ Team *createTeam(char name[50], char home[50], char city[50], int d, int m, int 
 
     return t;
 }
-
+// PARA QUESTÕES DE TESTES MAIS RAPIDOS, INSERE O TIME COM PONTOS
 Team *createTeamP(char name[50], char home[50], char city[50], int d, int m, int y, int id_team, int point)
 {
     Team *t = createTeam(name, home, city, d, m, y, id_team);
     t->points = point;
     return t;
 }
+
 void readTeam(Node *teams, Node *player, Node *coach, Node *match, Node *round)
 {
     char name[50], home[50], city[50], temp;
@@ -114,7 +115,7 @@ void readTeam(Node *teams, Node *player, Node *coach, Node *match, Node *round)
         scanf("%d", &id);
     } while (searchTeam(teams, id) != NULL);
 
-    insertEnd(teams, createTeam(name, home, city, d, m, y, id));
+    teams = insertEnd(teams, createTeam(name, home, city, d, m, y, id));
     system("clear");
     menuInclude(teams, player, coach, match, round);
 }
@@ -122,7 +123,7 @@ void readTeam(Node *teams, Node *player, Node *coach, Node *match, Node *round)
 void registerPlayer(Team *team, Player *player)
 {
     team->quanty_players++;
-    if (team->quanty_players <= 25)
+    if (team->quanty_players < 25)
         team->players = insertEnd(team->players, player);
 }
 

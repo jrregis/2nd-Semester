@@ -12,7 +12,7 @@
 
 void menuReport(Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
-    int op, len = 0;
+    int op, op1, len = 0;
     Node *show_team;
 
     system("clear");
@@ -44,6 +44,21 @@ void menuReport(Node *team, Node *player, Node *coach, Node *match, Node *round)
         mainMenu(team, player, coach, match, round);
     default:
         break;
+    }
+    if (op != 4)
+    {
+        printf("(1)VOLTAR (0)SAIR\n");
+        scanf("%d", &op1);
+        switch (op1)
+        {
+        case 0:
+            exitProgram(team, player, coach, match, round);
+            break;
+        case 1:
+            menuReport(team, player, coach, match, round);
+        default:
+            break;
+        }
     }
 }
 void menuSearch(Node *team, Node *player, Node *coach, Node *match, Node *round)
@@ -94,7 +109,7 @@ void menuSearch(Node *team, Node *player, Node *coach, Node *match, Node *round)
             showThrowOfMatch(searchMatch(match, id)->throw_s);
         }
         else
-            printf("PARTIDA NÃO CADASTRADA\n");
+            printf("PARTIDA NAO CADASTRADA\n");
         break;
     case 5:
         menuSignUp(team, player, coach, match, round);
@@ -103,26 +118,28 @@ void menuSearch(Node *team, Node *player, Node *coach, Node *match, Node *round)
     default:
         break;
     }
-
-    printf("(1)VOLTAR (0)SAIR\n");
-    scanf("%d", &op1);
-    switch (op1)
+    if (op != 5)
     {
-    case 0:
-        exit(1);
-        break;
-    case 1:
-        menuSignUp(team, player, coach, match, round);
-    default:
-        break;
+        printf("(1)VOLTAR (0)SAIR\n");
+        scanf("%d", &op1);
+        switch (op1)
+        {
+        case 0:
+            exitProgram(team, player, coach, match, round);
+            break;
+        case 1:
+            menuSignUp(team, player, coach, match, round);
+        default:
+            break;
+        }
     }
 }
 void menuDelete(Node *team, Node *player, Node *coach, Node *match, Node *round)
 {
-    int op, id;
+    int op, op1, id;
     system("clear");
     printf("\t\tEXCLUIR\n");
-    printf("0 - TIME\n1 - JOGADOR\n2 - TECNICO\n3 - RODADA\n4- PARTIDA\n5 - VOLTAR\n");
+    printf("0 - TIME\n1 - JOGADOR\n2 - TECNICO\n3 - RODADA\n4 - PARTIDA\n5 - VOLTAR\n");
     scanf("%d", &op);
 
     switch (op)
@@ -171,6 +188,21 @@ void menuDelete(Node *team, Node *player, Node *coach, Node *match, Node *round)
 
     default:
         break;
+    }
+    if (op != 5)
+    {
+        printf("(1)VOLTAR (0)SAIR\n");
+        scanf("%d", &op1);
+        switch (op1)
+        {
+        case 0:
+            exitProgram(team, player, coach, match, round);
+            break;
+        case 1:
+            menuSignUp(team, player, coach, match, round);
+        default:
+            break;
+        }
     }
 }
 void menuInclude(Node *team, Node *player, Node *coach, Node *match, Node *round)
@@ -337,21 +369,6 @@ void mainMenu(Node *team, Node *player, Node *coach, Node *match, Node *round)
         exit(1);
         break;
     }
-    if (op != 3)
-    {
-        printf("(1)VOLTAR (0)SAIR\n");
-        scanf("%d", &op1);
-        switch (op1)
-        {
-        case 0:
-            exitProgram(team, player, coach, match, round);
-            break;
-        case 1:
-            mainMenu(team, player, coach, match, round);
-        default:
-            break;
-        }
-    }
 }
 
 void markGoal(Match *m, Node *team, Node *player, Node *coach, Node *match, Node *round)
@@ -398,8 +415,11 @@ void markFault(Match *m, Node *team, Node *player, Node *coach, Node *match, Nod
 
     printf("HOUVE CARTAO VERMELHO (1)SIM (0)NAO: ");
     scanf("%d", &card_r);
-    printf("HOUVE CARTAO AMARELO  (1)SIM (0)NAO:");
-    scanf("%d", &card_y);
+    if (card_r == 0)
+    {
+        printf("HOUVE CARTAO AMARELO  (1)SIM (0)NAO:");
+        scanf("%d", &card_y);
+    }
 
     if (id_team == m->t1->id_team)
     {
@@ -594,6 +614,9 @@ void listPlayerToMatch(Match *m, Node *player)
     } while (op1 == 0);
 }
 
+//PARA QUESTÕES DE TESTES MAIS RÁPIDOS OS TIMES TEM 5 JOGADORES ESCALADOS
+//ASSIM COMO NO FUTEBOL DE SALÃO, PODENDO FACILMENTE SER AJUSTADO
+//PARA FUTEBOL DE CAMPO AJUSTANDO O FOR DE LEITURA DOS TITULARES
 void selectHeaderPlayers(Match *m)
 {
     int id_player;
@@ -601,6 +624,7 @@ void selectHeaderPlayers(Match *m)
     system("clear");
     printf("\t\tNARRACAO\n");
     printf("\tESCALAR JOGADORES DO %s\n", m->t1->name);
+    // LEITURA DE 5 JOGADORES TITULARES, PARA REALIZAR TESTES MAIS RÁPIDOS
     for (int i = 0; i < 5; i++)
     {
         printf("DIGITE A ID DO JOGADOR A SER ESCALADO: ");
@@ -614,6 +638,7 @@ void selectHeaderPlayers(Match *m)
     system("clear");
     printf("\t\tNARRACAO\n");
     printf("\tESCALAR JOGADORES DO %s\n", m->t2->name);
+    // LEITURA DE 5 JOGADORES TITULARES, PARA REALIZAR TESTES MAIS RÁPIDOS
     for (int i = 0; i < 5; i++)
     {
         printf("DIGITE A ID DO JOGADOR A SER ESCALADO: ");
@@ -625,14 +650,6 @@ void selectHeaderPlayers(Match *m)
         }
     }
 }
-
-void reportRank(Node *team)
-{
-    Node *aux;
-
-    int more_than;
-}
-
 void bubble_sort(Node *head, int op)
 {
     struct Node *tmp = createList(), *store = head;

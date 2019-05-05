@@ -13,7 +13,6 @@ void menuSearch(Node *team, Node *player, Node *coach, Node *match, Node *round)
 void menuToTell(Node *team, Node *player, Node *coach, Node *match, Node *round);              //MENU PARA NARRAR
 void menuThrow(Match *m, Node *team, Node *player, Node *coach, Node *match, Node *round);     //MENU PARA NARRA O LANCE
 void menuNarration(Match *m, Node *team, Node *player, Node *coach, Node *match, Node *round); //MENU DE GOLS/FALTAS/SUBSTITUIÇÕES
-
 void markGoal(Match *m, Node *team, Node *player, Node *coach, Node *match, Node *round);      //MARCA GOL
 void markFault(Match *m, Node *team, Node *player, Node *coach, Node *match, Node *round);     //MARCA FALTA
 void replacePlayer(Match *m, Node *team, Node *player, Node *coach, Node *match, Node *round); //SUBSTITUI JOGADOR NO TIME TITULAR

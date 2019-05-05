@@ -11,7 +11,7 @@ void printCoach(void *coach)
 {
     Coach *c = (Coach *)coach;
     printf("\n");
-    printf("%d - %s\n", c->id_coach, c->name);
+    printf("ID: %d - %s\n", c->id_coach, c->name);
     printf("\n");
 }
 
@@ -61,7 +61,7 @@ void readCoach(Node *team, Node *player, Node *coachs, Node *match, Node *round)
         scanf("%d", &id);
     } while (searchCoach(coachs, id) != NULL);
 
-    insertEnd(coachs, createCoach(name, id));
+    coachs = insertEnd(coachs, createCoach(name, id));
 
     system("clear");
     menuInclude(team, player, coachs, match, round);

@@ -1,14 +1,12 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "lseVoid.h"
-
 typedef struct
 {
     char name[50], positon[50];
     int age, number, id_player;
     int card_y, card_r, goal, fault;
 } Player;
-
 Player *createPlayer(char name[50], char position[50], int age, int number, int id_player);            //ALOCA A INFORMAÇÃO DO TIPO JOGADOR E PREENCHE SEUS DADOS SEM GOLS
 Player *createPlayerG(char name[50], char position[50], int age, int number, int id_player, int goal); //ALOCA A INFORMAÇÃO DO TIPO JOGADOR E PREENCHE SEUS DADOS COM GOLS
 Player *searchPlayer(Node *players, int id);                                                           //BUSCA JOGADOR

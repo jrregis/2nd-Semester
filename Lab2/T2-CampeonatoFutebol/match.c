@@ -10,7 +10,6 @@
 Match *createMatch(Node *team_head, Node *match)
 {
     Match *m = (Match *)malloc(sizeof(Match));
-
     int id_t1, id_t2;
 
     printf("DIGITE AS ID DOS TIMES\n");
@@ -44,6 +43,7 @@ void printThrowOfMatch(void *match_head)
     Match *m = (Match *)match_head;
     printf("MIN: %d - %s \n", ((Throw *)m)->min, ((Throw *)m)->desc_throw);
 }
+
 void printMatch(void *match_head)
 {
     Match *m = (Match *)match_head;

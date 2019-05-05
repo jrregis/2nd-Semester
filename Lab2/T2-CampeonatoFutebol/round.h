@@ -2,13 +2,11 @@
 #define ROUND_H
 #include "match.h"
 #include "lseVoid.h"
-
 typedef struct
 {
     int id_round;
     Node *match;
 } Round;
-
 Round *createRound(int id_round);           //ALOCA INFORMAÇÕES DO TIPO RODADA
 void readRound(Node *round);                //LE A RODADA
 Round *searchRound(Node *round, int id);    //PROCURA A RODADA

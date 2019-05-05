@@ -79,6 +79,7 @@ Player *createPlayer(char name[50], char position[50], int age, int number, int 
     return p;
 }
 
+// PARA QUESTÕES DE TESTES, CRIA OS JOGADORES COM O CAMPO GOLS JÁ POPULADO
 Player *createPlayerG(char name[50], char position[50], int age, int number, int id_player, int goal)
 {
     Player *p = createPlayer(name, position, age, number, id_player);
@@ -108,7 +109,7 @@ void readPlayer(Node *team, Node *players, Node *coach, Node *match, Node *round
         scanf("%d", &id);
     } while (searchPlayer(players, id) != NULL);
 
-    insertEnd(players, createPlayer(name, position, age, number, id));
+    players = insertEnd(players, createPlayer(name, position, age, number, id));
 
     system("clear");
     menuInclude(team, players, coach, match, round);

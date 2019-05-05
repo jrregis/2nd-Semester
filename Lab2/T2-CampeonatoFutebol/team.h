@@ -2,7 +2,6 @@
 #define TEAM_H
 #include "lseVoid.h"
 #include "player.h"
-
 typedef struct
 {
     char name[50], home[50], city[50];
@@ -10,7 +9,6 @@ typedef struct
     int points, fault, card_y, card_r, quanty_players, goal_done, goal_conceded;
     Node *players, *selection;
 } Team;
-
 Team *createTeam(char name[50], char home[50], char city[50], int d, int m, int y, int id_team);             //ALOCA INFORMAÇÕES DO TIPO RODADA SEM PONTOS
 Team *createTeamP(char name[50], char home[50], char city[50], int d, int m, int y, int id_team, int point); //ALOCA INFORMAÇÕES DO TIPO RODADA COM PONTOS
 Team *searchTeam(Node *teams, int id);                                                                       //BUSCA TIME

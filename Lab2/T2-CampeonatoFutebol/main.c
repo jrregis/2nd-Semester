@@ -17,14 +17,15 @@ int main()
     Node *player_head = createList();
     Node *coach_head = createList();
     Node *round_head = createList();
-    //NAVEGAÇÃO EH FEITA PELOS MENUS ESSAS PRIMEIRAS INSERÇÕES FORAM FEITAS PARA AGILIZAR OS TESTES
-    //CRIA NÓS NA LISTA DE TIMES COM PONTOS
+    //NAVEGAÇÃO É FEITA PELOS MENUS ESSAS PRIMEIRAS INSERÇÕES FORAM FEITAS PARA AGILIZAR OS TESTES
+    //CRIA NÓS NA LISTA DE TIMES, COM PONTOS
     team_head = insertEnd(team_head, createTeamP("Real", "Estadio do Real", "Madrid", 10, 10, 1998, 1, 3));
     team_head = insertEnd(team_head, createTeamP("Porto", "Estadio do Porto", "Porto", 10, 10, 1998, 2, 2));
     team_head = insertEnd(team_head, createTeamP("Inter", "Beira Rio", "Porto Alegre", 10, 10, 1998, 0, 4));
     team_head = insertEnd(team_head, createTeamP("Gremio", "Arena da OAS", "Porto Alegre", 10, 10, 1998, 3, 6));
     team_head = insertEnd(team_head, createTeamP("Brasil", "Estadio do Brasil", "Cidades Brasileiras", 10, 10, 1998, 4, 9));
 
+    round_head = insertEnd(round_head, createRound(1));
     //CRIA 15 NÓS NA LISTA DE JOGADORES COM IDADES, GOLS, NUMERO CAMISETA ALEATÓRIOS E O MESMO NOME GENÉRICO
     srand(time(NULL));
     for (int i = 0; i < 15; i++)

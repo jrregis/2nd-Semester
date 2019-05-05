@@ -13,9 +13,7 @@ bool equalRound(void *round, int id)
 Round *createRound(int id_round)
 {
     Round *r = (Round *)malloc(sizeof(Round));
-
     r->id_round = id_round;
-
     return r;
 }
 void readRound(Node *round)
@@ -28,9 +26,7 @@ void readRound(Node *round)
         scanf("%d", &id_round);
     } while (searchRound(round, id_round) != NULL);
 
-    insertEnd(round, createRound(id_round));
-
-    // r->match = insertEnd(r->match, m);
+    round = insertEnd(round, createRound(id_round));
 }
 
 Round *searchRound(Node *round, int id)
