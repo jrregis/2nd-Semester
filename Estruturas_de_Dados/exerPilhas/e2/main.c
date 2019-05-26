@@ -10,18 +10,19 @@ int main()
 
     /*pilha_push(p, 4);
     pilha_push(p, 3);
-    topo = pilha_pop(p);
+    pilha_pop(p);
     pilha_push(p, 8);
-    topo = pilha_pop(p);
+    pilha_pop(p);
     imprime(p);*/
 
     /*pilha_push(p, 3);
-    topo = pilha_pop(p);
-    topo = pilha_pop(p);
-    pilha_push(p, 4);*/
+    pilha_pop(p);
+    pilha_pop(p);
+    pilha_push(p, 4);
+    imprime(p);*/
 
     pilha_push(p, 1);
-    topo = pilha_pop(p);
+    pilha_pop(p);
     pilha_push(p, 2);
     pilha_push(p, 3);
     pilha_push(p, 4);

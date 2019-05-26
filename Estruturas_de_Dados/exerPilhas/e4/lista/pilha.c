@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "pilha.h"
-#include <stdbool.h>
 
-bool pilha_vazia(pilha *p)
+int pilha_vazia(pilha *p)
 {
     return (p->prim == NULL);
 }
@@ -12,6 +11,7 @@ pilha *pilha_cria(void)
 {
     pilha *p = (pilha *)malloc(sizeof(pilha));
     p->prim = NULL;
+
     return p;
 }
 
@@ -28,40 +28,27 @@ void pilha_pop(pilha *p)
 {
     lista *t;
 
-    if (pilha_vazia(p))
-    {
-        printf("PILHA VAZIA!\n");
-        exit(1);
-    }
-
     t = p->prim;
     p->prim = t->prox;
+
     free(t);
 }
 
 void imprime(pilha *p)
 {
     lista *l;
-    for (l = p->prim; l != NULL; l = l->prox)
+    if (p->prim != NULL)
     {
-        printf("%f\n", l->info);
+        for (l = p->prim; l != NULL; l = l->prox)
+        {
+            printf("%f\n", l->info);
+        }
     }
+    else
+        printf("PILHA VAZIA\n");
 }
 
-float topo(pilha *p)
+void pilha_esvazia(pilha *p)
 {
-    float topo;
-    topo = p->prim->info;
-
-    return topo;
-}
-
-int num_obj(pilha *p)
-{
-    lista *l;
-    int num = 0;
-
-    for (l = p->prim; l != NULL; l = l->prox)
-        num++;
-    return num;
+    p->prim = NULL;
 }

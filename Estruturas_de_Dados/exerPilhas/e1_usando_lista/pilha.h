@@ -8,6 +8,7 @@ typedef struct pilha
 {
     lista *prim;
 } pilha;
+
 void imprime(pilha *p);
 float pilha_pop(pilha *p);
 void pilha_push(pilha *p, float v);

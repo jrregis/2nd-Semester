@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 void imprime(Pilha *p);
+
 int pilha_vazia(Pilha *p)
 {
     return (p->n == 0);
@@ -17,8 +18,6 @@ Pilha *pilha_cria(void)
 
 void pilha_push(Pilha *p, float v)
 {
-    printf("\n\nTentando inserir o valor %.2f na pilha que jah possui %d elementos (aceita no maximo % d elementos)\n ", v, p->n, N);
-
     if (p->n == N)
     {
         printf("\nCapacidade da pilha estourou.\n");
@@ -47,7 +46,7 @@ float pilha_pop(Pilha *p)
 void imprime(Pilha *p)
 {
     printf("VALORES ARMAZENADOS NA PILHA: \n\n");
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < p->n; i++)
     {
         printf("Posicao %d = %f\n", i, p->vet[i]);
     }

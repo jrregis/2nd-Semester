@@ -12,7 +12,7 @@ void mainMenu(Node *head)
 
     system("clear");
     printf("\t\tCARROS\n");
-    printf("0 - CADASTROS\n");
+    printf("0 - LISTA DE CARROS\n");
     scanf("%d", &op);
     switch (op)
     {
@@ -78,12 +78,30 @@ void menuDelete(Node *head)
         exit(1);
     }
 }
+
+void menuShow(Node *head)
+{
+    int op;
+    system("clear");
+    show(head);
+
+    printf("\n\n[0]VOLTAR\n[1]SAIR ");
+    scanf("%d", &op);
+    switch (op)
+    {
+    case 0:
+        menuSign(head);
+        break;
+    case 1:
+        exit(1);
+    }
+}
 void menuSign(Node *head)
 {
     int op;
     system("clear");
-    printf("\t\tCADASTROS\n");
-    printf("0 - INCLUIR\n1 - EXCLUIR\n2 - BUSCAR\n3 - VOLTAR\n");
+    printf("\t\tOPERACAOES NA LISTA DE CARROS\n");
+    printf("0 - INCLUIR\n1 - EXCLUIR\n2 - BUSCAR\n3 - LISTAR TODOS CARROS\n4 - VOLTAR\n");
     scanf("%d", &op);
 
     switch (op)
@@ -98,7 +116,10 @@ void menuSign(Node *head)
         menuSearch(head);
         break;
     case 3:
-        // mainMenu(head);
+        menuShow(head);
+        break;
+    case 4:
+        mainMenu(head);
         break;
     default:
         exit(1);

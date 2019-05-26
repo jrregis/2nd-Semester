@@ -1,4 +1,5 @@
 #define N 3
+
 typedef struct Pilha
 {
     int n;

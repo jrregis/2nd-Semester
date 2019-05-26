@@ -1,13 +1,17 @@
+typedef struct lista
+{
+    float info;
+    struct lista *prox;
+} lista;
+
 typedef struct pilha
 {
-    int n;
-    float vet[5];
+    lista *prim;
 } pilha;
 
 int pilha_vazia(pilha *p);
 pilha *pilha_cria(void);
 void pilha_push(pilha *p, float v);
 void pilha_pop(pilha *p);
-void pilha_libera(pilha *p);
-int num_obj(pilha *p);
-float topo(pilha *p);
+void imprime(pilha *p);
+void pilha_esvazia(pilha *p);

@@ -12,6 +12,5 @@ int main()
     pilha_push(p, 10);
     pilha_push(p, 20);
     pilha_push(p, 30);
-
     imprime(p);
 }

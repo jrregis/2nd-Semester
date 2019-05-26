@@ -46,7 +46,7 @@ float pilha_pop(Pilha *p)
 void imprime(Pilha *p)
 {
     printf("VALORES ARMAZENADOS NA PILHA: \n\n");
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < p->n; i++)
     {
         printf("Posicao %d = %f\n", i, p->vet[i]);
     }
