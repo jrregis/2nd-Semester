@@ -50,5 +50,6 @@ void imprime(pilha *p)
 
 void pilha_esvazia(pilha *p)
 {
-    p->prim = NULL;
+    free(p);
+    // p->prim = NULL;
 }
