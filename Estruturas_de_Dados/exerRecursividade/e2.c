@@ -2,14 +2,10 @@
 #include <stdlib.h>
 void imprimir(int min, int max)
 {
-    int n = min + 1;
+    printf("%d\n", min + 1);
 
-    if (n < max)
-        printf("%d\n", n);
-    else
-        exit(1);
-
-    imprimir(n, max);
+    if (min + 2 != max)
+        imprimir(min + 1, max);
 }
 
 int main()

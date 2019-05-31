@@ -26,13 +26,14 @@ void pilha_push(pilha *p, float v)
     p->num_elements++;
 }
 
-void pilha_pop(pilha *p)
+float pilha_pop(pilha *p)
 {
     if (pilha_vazia(p))
     {
         printf("PILHA VAZIA\n");
         exit(1);
     }
+    float v = p->vet[p->num_elements - 1];
     p->num_elements--;
 }
 
@@ -49,7 +50,7 @@ void imprime(pilha *p)
         printf("PILHA VAZIA\n");
 }
 
-void pilha_esvazia(pilha *p)
+void esvazie(pilha *p)
 {
     p->num_elements = 0;
 }

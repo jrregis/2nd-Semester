@@ -11,6 +11,7 @@ int main()
     pilha_push(p, 4);
     pilha_push(p, 5);
 
-    pilha_esvazia(p);
+    esvazie(p);
+    printf("\n");
     imprime(p);
 }

@@ -7,6 +7,6 @@ typedef struct pilha
 int pilha_vazia(pilha *p);
 pilha *pilha_cria(void);
 void pilha_push(pilha *p, float v);
-void pilha_pop(pilha *p);
-void pilha_esvazia(pilha *p);
+float pilha_pop(pilha *p);
+void esvazie(pilha *p);
 void imprime(pilha *p);

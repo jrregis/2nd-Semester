@@ -2,14 +2,11 @@
 #include <stdlib.h>
 float calculaS(float n, float d)
 {
-    float s;
-    s = n / d;
-
     if (d > 50 && n > 99)
         return 0;
 
     else
-        return (s + calculaS(n + 2, d + 1));
+        return (n / d + calculaS(n + 2, d + 1));
 }
 
 int main()
