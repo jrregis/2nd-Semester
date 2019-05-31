@@ -111,14 +111,76 @@ void menuDelete(Node *head)
     }
 }
 
-void menuShow(Node *head)
+void menuShowByList(Node *head)
 {
     int op;
     system("clear");
-    printf("CARROS CADASTRADOS NO SISTEMA POR PLACA\n");
+    printf("\t\tCARROS POR PLACA\nUSANDO A LISTA\n");
     printf("MARCA\t    PLACA      ANO\n");
     show(head);
 
+    printf("\n\n[0]VOLTAR\n[1]SAIR ");
+    scanf("%d", &op);
+    switch (op)
+    {
+    case 0:
+        mainMenu(head);
+        break;
+    case 1:
+        exit(1);
+    }
+}
+
+void menuShowOrderBrand(Node *head)
+{
+    system("clear");
+    printf("\t\tCARROS POR MARCA\nUSANDO ARVORE\n");
+    printf("MARCA\t   PLACA    ANO\n");
+
+    Node_tree *tree = NULL;
+    Node *aux = head;
+    while (aux != NULL)
+    {
+        tree = insertByBrand(tree, searchCar(aux, aux->info->license_p));
+        aux = aux->next;
+    }
+
+    showSimetricByBrand(tree);
+
+    tree = destroyTree(tree);
+
+    int op;
+    printf("\n\n[0]VOLTAR\n[1]SAIR ");
+    scanf("%d", &op);
+    switch (op)
+    {
+    case 0:
+        mainMenu(head);
+        break;
+    case 1:
+        exit(1);
+    }
+}
+
+void menuShowOrderYear(Node *head)
+{
+    system("clear");
+    printf("\t\tCARROS PELO ANO\nUSANDO ARVORE\n");
+    printf("MARCA\t   PLACA    ANO\n");
+
+    Node_tree *tree = NULL;
+    Node *aux = head;
+    while (aux != NULL)
+    {
+        tree = insertByYear(tree, searchCar(aux, aux->info->license_p));
+        aux = aux->next;
+    }
+
+    showSimetricByYear(tree);
+
+    tree = destroyTree(tree);
+
+    int op;
     printf("\n\n[0]VOLTAR\n[1]SAIR ");
     scanf("%d", &op);
     switch (op)
@@ -160,7 +222,7 @@ void mainMenu(Node *head)
     int op;
     system("clear");
     printf("\t\tSISTEMA DE CONTROLE DE CARROS\n");
-    printf("0 - INCLUIR\n1 - EXCLUIR\n2 - BUSCAR\n3 - LISTAR CARROS PELA LISTA\n4 - SAIR\n");
+    printf("0 - INCLUIR\n1 - EXCLUIR\n2 - BUSCAR\n3 - LISTAR CARROS PELA PLACA\n4 - LISTAR CARROS PELA MARCA\n5 - LISTAR CARROS PELO ANO\n6 - SAIR\n");
     scanf("%d", &op);
 
     switch (op)
@@ -175,10 +237,13 @@ void mainMenu(Node *head)
         menuSearch(head);
         break;
     case 3:
-        menuShow(head);
+        menuShowByList(head);
         break;
     case 4:
-        mainMenu(head);
+        menuShowOrderBrand(head);
+        break;
+    case 5:
+        menuShowOrderYear(head);
         break;
     default:
         exit(1);

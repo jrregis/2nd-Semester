@@ -51,7 +51,7 @@ void show(Node *head)
     {
         c = aux->info;
 
-        printf("%s\t-  %s  -  %d\n", c->brand, c->license_p, c->year);
+        printf("%s\t-  %s  -  %d\n\n", c->brand, c->license_p, c->year);
 
         aux = aux->next;
     }

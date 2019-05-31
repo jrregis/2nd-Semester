@@ -96,7 +96,7 @@ void showSimetricByLicense(Node_tree *t)
     if (!isEmpty(t))
     {
         showSimetricByLicense(t->left);
-        printf("MARCA: %s\nPLACA: %s\nANO: %d\n\n", t->c->brand, t->c->license_p, t->c->year);
+        printf("%s\t- %s - %d\n\n", t->c->brand, t->c->license_p, t->c->year);
         showSimetricByLicense(t->right);
     }
 }
@@ -106,7 +106,7 @@ void showSimetricByBrand(Node_tree *t)
     if (!isEmpty(t))
     {
         showSimetricByBrand(t->left);
-        printf("MARCA: %s\nPLACA: %s\nANO: %d\n\n", t->c->brand, t->c->license_p, t->c->year);
+        printf("%s\t- %s - %d\n\n", t->c->brand, t->c->license_p, t->c->year);
         showSimetricByBrand(t->right);
     }
 }
@@ -116,7 +116,7 @@ void showSimetricByYear(Node_tree *t)
     if (!isEmpty(t))
     {
         showSimetricByYear(t->left);
-        printf("MARCA: %s\nPLACA: %s\nANO: %d\n\n", t->c->brand, t->c->license_p, t->c->year);
+        printf("%s\t- %s - %d\n\n", t->c->brand, t->c->license_p, t->c->year);
         showSimetricByYear(t->right);
     }
 }
