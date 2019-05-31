@@ -14,14 +14,13 @@ bool emptyList(Node *head)
     return (head == NULL);
 }
 
-Node *insert_in_order(Node *head, Car c)
+Node *insert_in_order(Node *head, Car *c)
 {
-    int len;
     Node *new_node;
     Node *prev_node = createList();
     Node *aux = head;
 
-    while (aux != NULL && strcmp(aux->info.license_p, c.license_p) < 0)
+    while (aux != NULL && strcmp(aux->info->license_p, c->license_p) < 0)
     {
         prev_node = aux;
         aux = aux->next;
@@ -46,10 +45,14 @@ Node *insert_in_order(Node *head, Car c)
 void show(Node *head)
 {
     Node *aux = head;
+    Car *c;
 
     while (aux != NULL)
     {
-        printf("%s\t-  %s  -  %d\n", aux->info.brand, aux->info.license_p, aux->info.year);
+        c = aux->info;
+
+        printf("%s\t-  %s  -  %d\n", c->brand, c->license_p, c->year);
+
         aux = aux->next;
     }
 }
@@ -60,8 +63,8 @@ Car *searchCar(Node *head, char license_p[8])
 
     while (tmp != NULL)
     {
-        if (strcmp(tmp->info.license_p, license_p) == 0)
-            return (Car *)tmp;
+        if (strcmp(tmp->info->license_p, license_p) == 0)
+            return (Car *)tmp->info;
         tmp = tmp->next;
     }
     return NULL;
@@ -72,7 +75,7 @@ Node *removeCar(Node *head, char license_p[8])
     Node *prev = createList();
     Node *tmp = head;
 
-    while (!emptyList(head) && strcmp(tmp->info.license_p, license_p) != 0)
+    while (!emptyList(head) && strcmp(tmp->info->license_p, license_p) != 0)
     {
         prev = tmp;
         tmp = tmp->next;
@@ -99,19 +102,34 @@ Node *freeList(Node *head)
     return NULL;
 }
 
-Car createCar(void)
+Car *createCar(void)
 {
-    Car c;
+    Car *c = (Car *)malloc(sizeof(Car));
+
     system("clear");
     printf("CADASTRO DE CARRO:\n");
     printf("DIGITE A PLACA NO FORMATO (XXXX111): ");
-    scanf("%s", c.license_p);
+    scanf("%s", c->license_p);
 
     printf("DIGITE A MARCA: ");
-    scanf("%s", c.brand);
+    scanf("%s", c->brand);
 
     printf("DIGITE O ANO: ");
-    scanf("%d", &c.year);
+    scanf("%d", &c->year);
 
     return c;
+}
+
+void printCar(Node *head, char license_p[8])
+{
+    Car *c = (Car *)malloc(sizeof(Car));
+    if (searchCar(head, license_p) != NULL)
+    {
+        c = searchCar(head, license_p);
+
+        printf("DADOS DO CARRO BUSCADO:\n");
+        printf("PLACA: %s\nMARCA: %s\nANO:%d\n", c->license_p, c->brand, c->year);
+    }
+    else
+        printf("CARRO NÃO CADASTRADO!\n");
 }

@@ -3,24 +3,11 @@
 #include <string.h>
 #include <unistd.h>
 #include "lse.h"
+#include "tree.h"
+
 void menuSign(Node *head);
 void printCar(Node *head, char license_p[8]);
-
-void mainMenu(Node *head)
-{
-    int op, op1, i = 0;
-
-    system("clear");
-    printf("\t\tCARROS\n");
-    printf("0 - LISTA DE CARROS\n");
-    scanf("%d", &op);
-    switch (op)
-    {
-    case 0:
-        menuSign(head);
-        break;
-    }
-}
+void mainMenu(Node *head);
 
 void menuInclude(Node *head)
 {
@@ -28,11 +15,12 @@ void menuInclude(Node *head)
     mainMenu(head);
 }
 
-void menuSearch(Node *head)
+void menuSearchInList(Node *head)
 {
     int op;
     char license_p[8];
     system("clear");
+    printf("\t\tBUSCA PELA LISTA\n");
     printf("DIGITE A PLACA A SER BUSCADA: ");
     scanf("%s", license_p);
 
@@ -43,7 +31,51 @@ void menuSearch(Node *head)
     switch (op)
     {
     case 0:
-        menuSign(head);
+        mainMenu(head);
+        break;
+    case 1:
+        exit(1);
+    }
+}
+
+void menuSearchInTree(Node *head)
+{
+    system("clear");
+    printf("\t\tBUSCA PELA ARVORE:\n");
+
+    Node_tree *tree = NULL;
+    Node *aux = head;
+    while (aux != NULL)
+    {
+        tree = insertByLicense(tree, searchCar(aux, aux->info->license_p));
+        aux = aux->next;
+    }
+
+    char license[8];
+    printf("DIGITE A PLACA: ");
+    scanf("%s", license);
+
+    Node_tree *see = search(tree, license);
+
+    if (see != NULL)
+    {
+        Car *car = see->c;
+        printf("DADOS DO CARRO BUSCADO:\n");
+        printf("PLACA:%s\nMARCA:%s\nANO:%d\n", car->license_p, car->brand, car->year);
+    }
+    else
+        printf("CARRO NAO CADASTRADO\n");
+
+    tree = destroyTree(tree);
+    free(see);
+
+    int op;
+    printf("\n\n[0]VOLTAR\n[1]SAIR ");
+    scanf("%d", &op);
+    switch (op)
+    {
+    case 0:
+        mainMenu(head);
         break;
     case 1:
         exit(1);
@@ -72,7 +104,7 @@ void menuDelete(Node *head)
     switch (op)
     {
     case 0:
-        menuSign(head);
+        mainMenu(head);
         break;
     case 1:
         exit(1);
@@ -83,6 +115,8 @@ void menuShow(Node *head)
 {
     int op;
     system("clear");
+    printf("CARROS CADASTRADOS NO SISTEMA POR PLACA\n");
+    printf("MARCA\t    PLACA      ANO\n");
     show(head);
 
     printf("\n\n[0]VOLTAR\n[1]SAIR ");
@@ -90,18 +124,43 @@ void menuShow(Node *head)
     switch (op)
     {
     case 0:
-        menuSign(head);
+        mainMenu(head);
         break;
     case 1:
         exit(1);
     }
 }
-void menuSign(Node *head)
+
+void menuSearch(Node *head)
 {
     int op;
     system("clear");
-    printf("\t\tOPERACAOES NA LISTA DE CARROS\n");
-    printf("0 - INCLUIR\n1 - EXCLUIR\n2 - BUSCAR\n3 - LISTAR TODOS CARROS\n4 - VOLTAR\n");
+    printf("\t\tBUSCA DE VEICULOS CADASTRADOS\n");
+    printf("0 - BUSCAR PELA LISTA\n1 - BUSCAR PELA ARVORE\n2 - VOLTAR\n");
+    scanf("%d", &op);
+
+    switch (op)
+    {
+    case 0:
+        menuSearchInList(head);
+        break;
+    case 1:
+        menuSearchInTree(head);
+        break;
+    case 2:
+        mainMenu(head);
+        break;
+    default:
+        exit(1);
+    }
+}
+
+void mainMenu(Node *head)
+{
+    int op;
+    system("clear");
+    printf("\t\tSISTEMA DE CONTROLE DE CARROS\n");
+    printf("0 - INCLUIR\n1 - EXCLUIR\n2 - BUSCAR\n3 - LISTAR CARROS PELA LISTA\n4 - SAIR\n");
     scanf("%d", &op);
 
     switch (op)
@@ -125,18 +184,4 @@ void menuSign(Node *head)
         exit(1);
         break;
     }
-}
-
-void printCar(Node *head, char license_p[8])
-{
-    Car *c;
-    if (searchCar(head, license_p) != NULL)
-    {
-        c = searchCar(head, license_p);
-
-        printf("DADOS DO CARRO BUSCADO:\n");
-        printf("PLACA: %s\nMARCA: %s\nANO:%d\n", c->license_p, c->brand, c->year);
-    }
-    else
-        printf("CARRO NÃO CADASTRADO!\n");
 }

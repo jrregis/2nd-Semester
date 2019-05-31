@@ -11,17 +11,18 @@ typedef struct Car
 
 typedef struct Node
 {
-    Car info;
+    Car *info;
     struct Node *next;
 } Node;
 
 Node *createList(void);
-Node *insert_in_order(Node *head, Car c);
+Node *insert_in_order(Node *head, Car *c);
 bool emptyList(Node *head);
 Node *freeList(Node *head);
 void show(Node *head);
 Car *searchCar(Node *head, char license_p[8]);
 Node *removeCar(Node *head, char license_p[8]);
-Car createCar(void);
+Car *createCar(void);
+void printCar(Node *head, char license_p[8]);
 
 #endif
