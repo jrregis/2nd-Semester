@@ -1,21 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include <unistd.h>
 #include "lse.h"
 #include "tree.h"
+void exitProgram(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year);
+void menuSign(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year);
+void mainMenu(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year);
 
-void menuSign(Node *head);
-void printCar(Node *head, char license_p[8]);
-void mainMenu(Node *head);
-
-void menuInclude(Node *head)
+void menuInclude(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year)
 {
-    head = insert_in_order(head, createCar());
-    mainMenu(head);
+    Car *c = createCar();
+    if (searchCar(head, c->license_p) == NULL)
+    {
+        head = insert_in_order(head, c);
+
+        license = insertByLicense(license, c);
+        brand = insertByBrand(brand, c);
+        year = insertByYear(year, c);
+    }
+    else
+    {
+        printf("JA POSSUI UM CARRO CADASTRADO NO SISTEMA COM ESSA PLACA!\n");
+        printf("TENTE NOVAMENTE COM UMA PLACA DIFERENTE!\n");
+        sleep(3);
+    }
+
+    mainMenu(head, license, brand, year);
 }
 
-void menuSearchInList(Node *head)
+void menuSearchInList(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year)
 {
     int op;
     char license_p[8];
@@ -24,6 +39,9 @@ void menuSearchInList(Node *head)
     printf("DIGITE A PLACA A SER BUSCADA: ");
     scanf("%s", license_p);
 
+    for (int i = 0; i < strlen(license_p); i++)
+        license_p[i] = toupper(license_p[i]);
+
     printCar(head, license_p);
 
     printf("\n\n[0]VOLTAR\n[1]SAIR ");
@@ -31,31 +49,26 @@ void menuSearchInList(Node *head)
     switch (op)
     {
     case 0:
-        mainMenu(head);
+        mainMenu(head, license, brand, year);
         break;
     case 1:
-        exit(1);
+        exitProgram(head, license, brand, year);
     }
 }
 
-void menuSearchInTree(Node *head)
+void menuSearchInTree(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year)
 {
     system("clear");
     printf("\t\tBUSCA PELA ARVORE:\n");
 
-    Node_tree *tree = NULL;
-    Node *aux = head;
-    while (aux != NULL)
-    {
-        tree = insertByLicense(tree, searchCar(aux, aux->info->license_p));
-        aux = aux->next;
-    }
-
-    char license[8];
+    char license_p[8];
     printf("DIGITE A PLACA: ");
-    scanf("%s", license);
+    scanf("%s", license_p);
 
-    Node_tree *see = search(tree, license);
+    for (int i = 0; i < strlen(license_p); i++)
+        license_p[i] = toupper(license_p[i]);
+
+    Node_tree *see = search(license, license_p);
 
     if (see != NULL)
     {
@@ -66,7 +79,6 @@ void menuSearchInTree(Node *head)
     else
         printf("CARRO NAO CADASTRADO\n");
 
-    tree = destroyTree(tree);
     free(see);
 
     int op;
@@ -75,24 +87,34 @@ void menuSearchInTree(Node *head)
     switch (op)
     {
     case 0:
-        mainMenu(head);
+        mainMenu(head, license, brand, year);
         break;
     case 1:
-        exit(1);
+        exitProgram(head, license, brand, year);
     }
 }
 
-void menuDelete(Node *head)
+void menuDelete(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year)
 {
     int op;
     char license_p[8];
+    Car *c;
     system("clear");
     printf("DIGITE A PLACA DO CARRO AS SER EXCLUIDO: ");
     scanf("%s", license_p);
 
+    for (int i = 0; i < strlen(license_p); i++)
+        license_p[i] = toupper(license_p[i]);
+
     if (searchCar(head, license_p) != NULL)
     {
-        removeCar(head, license_p);
+        c = searchCar(head, license_p);
+
+        license = removeNodeByLicense(license, c);
+        brand = removeNodeByBrand(brand, c);
+        year = removeNodeByYear(year, c);
+
+        head = removeCar(head, license_p);
         printf("CARRO EXCLUIDO!\n");
     }
 
@@ -104,19 +126,19 @@ void menuDelete(Node *head)
     switch (op)
     {
     case 0:
-        mainMenu(head);
+        mainMenu(head, license, brand, year);
         break;
     case 1:
-        exit(1);
+        exitProgram(head, license, brand, year);
     }
 }
 
-void menuShowByList(Node *head)
+void menuShowByList(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year)
 {
     int op;
     system("clear");
     printf("\t\tCARROS POR PLACA\nUSANDO A LISTA\n");
-    printf("MARCA\t    PLACA      ANO\n");
+    printf("MARCA\t\t    PLACA      ANO\n");
     show(head);
 
     printf("\n\n[0]VOLTAR\n[1]SAIR ");
@@ -124,30 +146,20 @@ void menuShowByList(Node *head)
     switch (op)
     {
     case 0:
-        mainMenu(head);
+        mainMenu(head, license, brand, year);
         break;
     case 1:
-        exit(1);
+        exitProgram(head, license, brand, year);
     }
 }
 
-void menuShowOrderBrand(Node *head)
+void menuShowOrderBrand(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year)
 {
     system("clear");
     printf("\t\tCARROS POR MARCA\nUSANDO ARVORE\n");
-    printf("MARCA\t   PLACA    ANO\n");
+    printf("MARCA\t\t    PLACA      ANO\n");
 
-    Node_tree *tree = NULL;
-    Node *aux = head;
-    while (aux != NULL)
-    {
-        tree = insertByBrand(tree, searchCar(aux, aux->info->license_p));
-        aux = aux->next;
-    }
-
-    showSimetricByBrand(tree);
-
-    tree = destroyTree(tree);
+    showSimetricByBrand(brand);
 
     int op;
     printf("\n\n[0]VOLTAR\n[1]SAIR ");
@@ -155,30 +167,20 @@ void menuShowOrderBrand(Node *head)
     switch (op)
     {
     case 0:
-        mainMenu(head);
+        mainMenu(head, license, brand, year);
         break;
     case 1:
-        exit(1);
+        exitProgram(head, license, brand, year);
     }
 }
 
-void menuShowOrderYear(Node *head)
+void menuShowOrderYear(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year)
 {
     system("clear");
     printf("\t\tCARROS PELO ANO\nUSANDO ARVORE\n");
-    printf("MARCA\t   PLACA    ANO\n");
+    printf("MARCA\t\t    PLACA      ANO\n");
 
-    Node_tree *tree = NULL;
-    Node *aux = head;
-    while (aux != NULL)
-    {
-        tree = insertByYear(tree, searchCar(aux, aux->info->license_p));
-        aux = aux->next;
-    }
-
-    showSimetricByYear(tree);
-
-    tree = destroyTree(tree);
+    showSimetricByYear(year);
 
     int op;
     printf("\n\n[0]VOLTAR\n[1]SAIR ");
@@ -186,14 +188,14 @@ void menuShowOrderYear(Node *head)
     switch (op)
     {
     case 0:
-        mainMenu(head);
+        mainMenu(head, license, brand, year);
         break;
     case 1:
-        exit(1);
+        exitProgram(head, license, brand, year);
     }
 }
 
-void menuSearch(Node *head)
+void menuSearch(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year)
 {
     int op;
     system("clear");
@@ -204,20 +206,20 @@ void menuSearch(Node *head)
     switch (op)
     {
     case 0:
-        menuSearchInList(head);
+        menuSearchInList(head, license, brand, year);
         break;
     case 1:
-        menuSearchInTree(head);
+        menuSearchInTree(head, license, brand, year);
         break;
     case 2:
-        mainMenu(head);
+        mainMenu(head, license, brand, year);
         break;
     default:
-        exit(1);
+        exitProgram(head, license, brand, year);
     }
 }
 
-void mainMenu(Node *head)
+void mainMenu(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year)
 {
     int op;
     system("clear");
@@ -228,25 +230,34 @@ void mainMenu(Node *head)
     switch (op)
     {
     case 0:
-        menuInclude(head);
+        menuInclude(head, license, brand, year);
         break;
     case 1:
-        menuDelete(head);
+        menuDelete(head, license, brand, year);
         break;
     case 2:
-        menuSearch(head);
+        menuSearch(head, license, brand, year);
         break;
     case 3:
-        menuShowByList(head);
+        menuShowByList(head, license, brand, year);
         break;
     case 4:
-        menuShowOrderBrand(head);
+        menuShowOrderBrand(head, license, brand, year);
         break;
     case 5:
-        menuShowOrderYear(head);
+        menuShowOrderYear(head, license, brand, year);
         break;
     default:
-        exit(1);
+        exitProgram(head, license, brand, year);
         break;
     }
+}
+
+void exitProgram(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year)
+{
+    license = destroyTree(license);
+    brand = destroyTree(brand);
+    year = destroyTree(year);
+    head = freeList(head);
+    exit(1);
 }

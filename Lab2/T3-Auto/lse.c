@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <ctype.h>
 
 Node *createList(void)
 {
@@ -51,8 +52,10 @@ void show(Node *head)
     {
         c = aux->info;
 
-        printf("%s\t-  %s  -  %d\n\n", c->brand, c->license_p, c->year);
-
+        if (strlen(c->brand) <= 7)
+            printf("%s\t\t-  %s  -  %d\n\n", c->brand, c->license_p, c->year);
+        else
+            printf("%s\t-  %s  -  %d\n\n", c->brand, c->license_p, c->year);
         aux = aux->next;
     }
 }
@@ -111,8 +114,18 @@ Car *createCar(void)
     printf("DIGITE A PLACA NO FORMATO (XXXX111): ");
     scanf("%s", c->license_p);
 
+    for (int i = 0; i < strlen(c->license_p); i++)
+    {
+        c->license_p[i] = toupper(c->license_p[i]);
+    }
+
     printf("DIGITE A MARCA: ");
     scanf("%s", c->brand);
+
+    for (int i = 0; i < strlen(c->license_p); i++)
+    {
+        c->brand[i] = toupper(c->brand[i]);
+    }
 
     printf("DIGITE O ANO: ");
     scanf("%d", &c->year);
@@ -123,6 +136,7 @@ Car *createCar(void)
 void printCar(Node *head, char license_p[8])
 {
     Car *c = (Car *)malloc(sizeof(Car));
+
     if (searchCar(head, license_p) != NULL)
     {
         c = searchCar(head, license_p);
