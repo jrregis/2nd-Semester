@@ -8,7 +8,7 @@
 void exitProgram(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year);
 void menuSign(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year);
 void mainMenu(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year);
-char *upperCase(char *license);
+void upperCase(char *license);
 char *readLicensePlate(char license_p[8]);
 void menuBack(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year);
 
@@ -68,8 +68,6 @@ void menuSearchInTree(Node *head, Node_tree *license, Node_tree *brand, Node_tre
     }
     else
         printf("CARRO NAO CADASTRADO\n");
-
-    free(see);
 
     menuBack(head, license, brand, year);
 }
@@ -203,11 +201,10 @@ void exitProgram(Node *head, Node_tree *license, Node_tree *brand, Node_tree *ye
     exit(1);
 }
 
-char *upperCase(char license[8])
+void upperCase(char *license)
 {
     for (int i = 0; i < strlen(license); i++)
         license[i] = toupper(license[i]);
-    return license;
 }
 
 char *readLicensePlate(char *license_p)

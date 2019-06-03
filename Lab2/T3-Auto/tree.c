@@ -158,12 +158,14 @@ Node_tree *removeNodeByLicense(Node_tree *t, Car *c)
             free(t);
             t = NULL;
         }
+
         else if (t->left == NULL)
         {
             Node_tree *aux = t;
             t = t->right;
             free(aux);
         }
+
         else if (t->right == NULL)
         {
             Node_tree *aux = t;

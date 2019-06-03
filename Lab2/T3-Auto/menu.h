@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include "lse.h"
 #include "tree.h"
+
 void mainMenu(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year);
 void menuInclude(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year);
 void menuShow(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year);
@@ -17,7 +18,7 @@ void menuShowOrderBrand(Node *head, Node_tree *license, Node_tree *brand, Node_t
 void menuShowOrderYear(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year);
 void menuSearch(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year);
 void exitProgram(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year);
-char *upperCase(char *license);
+void upperCase(char *license);
 char *readLicensePlate(char license_p[8]);
 void menuBack(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year);
 
