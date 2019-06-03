@@ -1,8 +1,5 @@
 #ifndef TREE_H
 #define TREE_H
-#define BY_LICENSE 1
-#define BY_YEAR 2
-#define BY_BRAND 3
 #include "lse.h"
 
 typedef struct Node_tree
