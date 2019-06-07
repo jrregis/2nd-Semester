@@ -24,5 +24,6 @@ Car *searchCar(Node *head, char license_p[8]);
 Node *removeCar(Node *head, char license_p[8]);
 Car *createCar(void);
 void printCar(Node *head, char license_p[8]);
+void upperCase(char *license);
 
 #endif

@@ -114,18 +114,12 @@ Car *createCar(void)
     printf("DIGITE A PLACA NO FORMATO (XXXX111): ");
     scanf("%s", c->license_p);
 
-    for (int i = 0; i < strlen(c->license_p); i++)
-    {
-        c->license_p[i] = toupper(c->license_p[i]);
-    }
+    upperCase(c->license_p);
 
     printf("DIGITE A MARCA: ");
     scanf("%s", c->brand);
 
-    for (int i = 0; i < strlen(c->license_p); i++)
-    {
-        c->brand[i] = toupper(c->brand[i]);
-    }
+    upperCase(c->brand);
 
     printf("DIGITE O ANO: ");
     scanf("%d", &c->year);
@@ -146,4 +140,10 @@ void printCar(Node *head, char license_p[8])
     }
     else
         printf("CARRO NÃO CADASTRADO!\n");
+}
+
+void upperCase(char *license)
+{
+    for (int i = 0; i < strlen(license); i++)
+        license[i] = toupper(license[i]);
 }

@@ -6,7 +6,7 @@
 
 int main()
 {
-    Node *test = createList();
+    Node *list = createList();
     Node_tree *by_license = NULL;
     Node_tree *by_year = NULL;
     Node_tree *by_brand = NULL;
@@ -47,42 +47,42 @@ int main()
     strcpy(c1->license_p, "MHM0472");
     strcpy(c2->license_p, "KFZ0319");
     strcpy(c3->license_p, "JKV1797");
-    strcpy(c4->license_p, "MBH8741");
+    strcpy(c4->license_p, "BBH8741");
     strcpy(c5->license_p, "AEG5525");
-    strcpy(c6->license_p, "MIW6624");
+    strcpy(c6->license_p, "PIW6624");
     strcpy(c7->license_p, "KEN5211");
-    strcpy(c8->license_p, "MZO7001");
-    strcpy(c9->license_p, "KAO4233");
-    strcpy(c10->license_p, "MMP3363");
+    strcpy(c8->license_p, "LZO7001");
+    strcpy(c9->license_p, "ZAO4233");
+    strcpy(c10->license_p, "QMP3363");
 
     //CARROS INSERIDOS NA LISTA PARA TESTAR MAIS RAPIDO AS FUNÇÕES A PARTIR DOS MENUS
-    test = insert_in_order(test, c1);
-    test = insert_in_order(test, c2);
-    test = insert_in_order(test, c3);
-    test = insert_in_order(test, c4);
-    test = insert_in_order(test, c5);
-    test = insert_in_order(test, c6);
-    test = insert_in_order(test, c7);
-    test = insert_in_order(test, c8);
-    test = insert_in_order(test, c9);
-    test = insert_in_order(test, c10);
+    list = insert_in_order(list, c1);
+    list = insert_in_order(list, c2);
+    list = insert_in_order(list, c3);
+    list = insert_in_order(list, c4);
+    list = insert_in_order(list, c5);
+    list = insert_in_order(list, c6);
+    list = insert_in_order(list, c7);
+    list = insert_in_order(list, c8);
+    list = insert_in_order(list, c9);
+    list = insert_in_order(list, c10);
 
     //CARROS INSERIDOS NAS 3 ARVORES A PARTIR DA LISTA PARA TESTAR MAIS RAPIDO AS FUNÇÕES
-    Node *aux = test;
+    Node *aux = list;
     while (aux != NULL)
     {
         by_license = insertByLicense(by_license, searchCar(aux, aux->info->license_p));
         aux = aux->next;
     }
 
-    aux = test;
+    aux = list;
     while (aux != NULL)
     {
         by_brand = insertByBrand(by_brand, searchCar(aux, aux->info->license_p));
         aux = aux->next;
     }
 
-    aux = test;
+    aux = list;
     while (aux != NULL)
     {
         by_year = insertByYear(by_year, searchCar(aux, aux->info->license_p));
@@ -91,35 +91,35 @@ int main()
 
     free(aux);
     /////////////////////OPÇÃO DE NAVEGAÇÃO POR MENU
-    mainMenu(test, by_license, by_brand, by_year);
+    mainMenu(list, by_license, by_brand, by_year);
 
     //TESTES RÁPIDOS DAS FUNÇÕES
     //MOSTRANDO AS ORDENCOES DA LISTA PELA PLACA
     // E DAS ARVORES PELA MARCA E ANO RESPECTIVAMENTE
     /* printf("LISTA ORDENADA PELA PLACA\n");
-    show(test);
+    show(list);
     printf("PERCURSO DA ARVORE ORDENADO PELA MARCA:\n");
     showSimetricByBrand(by_brand);
     printf("PERCURSO DA ARVORE ORDENADO PELO ANO:\n");
     showSimetricByYear(by_year);
 
     ////EXCLUINDO ALGUNS CARROS
-    test = removeCar(test, "MHM0472");
+    list = removeCar(list, "MHM0472");
     by_license = removeNodeByLicense(by_license, c1);
     by_brand = removeNodeByBrand(by_brand, c1);
     by_year = removeNodeByYear(by_year, c1);
 
-    test = removeCar(test, "MZO7001");
+    list = removeCar(list, "MZO7001");
     by_license = removeNodeByLicense(by_license, c8);
     by_brand = removeNodeByBrand(by_brand, c8);
     by_year = removeNodeByYear(by_year, c8);
 
-    test = removeCar(test, "JKV1797");
+    list = removeCar(list, "JKV1797");
     by_license = removeNodeByLicense(by_license, c3);
     by_brand = removeNodeByBrand(by_brand, c3);
     by_year = removeNodeByYear(by_year, c3);
 
-    test = removeCar(test, "AEG5525");
+    list = removeCar(list, "AEG5525");
     by_license = removeNodeByLicense(by_license, c5);
     by_brand = removeNodeByBrand(by_brand, c5);
     by_year = removeNodeByYear(by_year, c5);
@@ -127,7 +127,7 @@ int main()
     //MOSTRANDO AS ORDENCOES DA LISTA PELA PLACA
     // E DAS ARVORES PELA MARCA E ANO RESPECTIVAMENTE
     printf("LISTA ORDENADA PELA PLACA APOS EXCLUSAO:\n");
-    show(test);
+    show(list);
     printf("PERCURSO DA ARVORE ORDENADO PELA MARCA APOS EXCLUSAO:\n");
     showSimetricByBrand(by_brand);
     printf("PERCURSO DA ARVORE ORDENADO PELO ANO APOS EXCLUSAO:\n");
@@ -136,5 +136,5 @@ int main()
     by_license = destroyTree(by_license);
     by_brand = destroyTree(by_brand);
     by_year = destroyTree(by_year);
-    test = freeList(test);*/
+    list = freeList(list);*/
 }

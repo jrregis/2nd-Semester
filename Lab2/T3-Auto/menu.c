@@ -8,7 +8,6 @@
 void exitProgram(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year);
 void menuSign(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year);
 void mainMenu(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year);
-void upperCase(char *license);
 char *readLicensePlate(char license_p[8]);
 void menuBack(Node *head, Node_tree *license, Node_tree *brand, Node_tree *year);
 
@@ -199,12 +198,6 @@ void exitProgram(Node *head, Node_tree *license, Node_tree *brand, Node_tree *ye
     year = destroyTree(year);
     head = freeList(head);
     exit(1);
-}
-
-void upperCase(char *license)
-{
-    for (int i = 0; i < strlen(license); i++)
-        license[i] = toupper(license[i]);
 }
 
 char *readLicensePlate(char *license_p)
