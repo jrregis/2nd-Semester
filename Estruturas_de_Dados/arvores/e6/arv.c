@@ -37,13 +37,13 @@ bool igual(arv *a, arv *b)
     if (vazia(a) && vazia(b))
         return true;
 
-    if (!vazia(a) && vazia(b) || vazia(a) && !vazia(b))
+    if ((!vazia(a) && vazia(b)) || (vazia(a) && !vazia(b)))
         return false;
 
     if (a->info != b->info)
         return false;
 
-    if (!igual(a->esq, b->esq) && igual(a->dir, b->dir))
+    if (!(igual(a->esq, b->esq)) && (igual(a->dir, b->dir)))
         return false;
 
     return true;

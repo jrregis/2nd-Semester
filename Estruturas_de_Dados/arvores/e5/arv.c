@@ -34,11 +34,12 @@ arv *arv_libera(arv *a)
 
 int num_filho(arv *a)
 {
-    if (vazia(a))
-        return 0;
+    if (!vazia(a))
+    {
+        return ((a->esq != NULL && a->dir == NULL) || (a->dir != NULL && a->esq == NULL)) +
+               num_filho(a->esq) +
+               num_filho(a->dir);
+    }
 
-    if (!vazia(a->dir) && vazia(a->esq) || vazia(a->dir) && !vazia(a->esq))
-        return 1 + num_filho(a->dir) + num_filho(a->esq);
-
-    return num_filho(a->dir) + num_filho(a->esq);
+    return 0;
 }

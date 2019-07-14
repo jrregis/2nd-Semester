@@ -36,14 +36,12 @@ arv *arv_libera(arv *a)
 
 int num_folha(arv *a)
 {
-    if (vazia(a->dir) && vazia(a->esq))
-        return 1;
+    int folha = 0;
+    if (a == NULL)
+        return 0;
 
-    if (vazia(a->esq))
-        return num_folha(a->dir);
+    if (a->esq == NULL && a->dir == NULL)
+        folha = 1;
 
-    if (vazia(a->dir))
-        return num_folha(a->esq);
-
-    return num_folha(a->esq) + num_folha(a->dir);
+    return folha + num_folha(a->esq) + num_folha(a->dir);
 }
